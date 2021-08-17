@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body { 
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+#horizontal_bar_chart {
+    width: 800px;
+    height: 300px;
+    border: 1px solid red;
+}
