@@ -20,31 +20,67 @@
                 [No canvas support]
             </canvas>
         </section>
-        <section></section>
-        <section></section>
+        <section>
+            <canvas id="donut_chart" width="450" height="450">
+                [No canvas support]
+            </canvas>
+        </section>
+        <section>
+            <canvas id="donut_3d_chart" width="600" height="350" style="border: 1px solid #eee">
+                [No canvas support]
+            </canvas>
+        </section>
 
         <!-- SVG -->
         <section>
-            <div id="horizontal_bar_chart"></div>
+            <div id="bipolar_chart"></div>
         </section>
-        <section></section>
-        <section></section>
+       
+        <section>
+            <div id="horses_shoes"></div>
+        </section>
+
+        <section>
+            <div id="line_chart"></div>
+        </section>
     </main>
     <footer>
 
     </footer>
-    <!-- A non-filled Radar chart -->
-    <script src="/AGU_TL-01_desjardins_elisabeth/src/assets/scripts/RGraph.common.core.js"></script>
-    <script src="/AGU_TL-01_desjardins_elisabeth/src/assets/scripts/RGraph.common.effects.js"></script>
-    <script src="/AGU_TL-01_desjardins_elisabeth/src/assets/scripts/RGraph.radar.js"></script>
+
+    <script src="../src/assets/scripts/RGraph.common.core.js"></script>
+    <script src="../src/assets/scripts/RGraph.common.effects.js"></script>
+    <script src="../src/assets/scripts/RGraph.radar.js"></script>
+    <script src="../src/assets/scripts/RGraph.activity.js"></script>
+
+    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.common.dynamic.js"></script>
+    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.common.tooltips.js"></script>
+    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.pie.js"></script>
 
     <!-- SVG Horizontal Bar chart API reference -->
 
-    <script src="/AGU_TL-01_desjardins_elisabeth/src/assets/scripts/RGraph.svg.common.core.js"></script>
-    <script src="/AGU_TL-01_desjardins_elisabeth/src/assets/scripts/RGraph.svg.hbar.js"></script>
-    <script src="/AGU_TL-01_desjardins_elisabeth/src/assets/scripts/RGraph.svg.bar.js"></script>
-    <script src="/AGU_TL-01_desjardins_elisabeth/src/assets/scripts/RGraph.svg.common.tooltips.js"></script>
+    <script src="../src/assets/scripts/RGraph.svg.hbar.js"></script>
+    <script src="../src/assets/scripts/RGraph.svg.bar.js"></script>
+    <script src="../src/assets/scripts/RGraph.svg.common.core.js"></script>
+    <script src="../src/assets/scripts/RGraph.svg.common.tooltips.js"></script>
 
-    <script src="/AGU_TL-01_desjardins_elisabeth/src/assets/scripts/index.js"></script>
+    <!-- Remplacer l'emplacement du dossier -->
+
+    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.bipolar.js"></script>
+    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.horseshoe.js"></script>
+    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.line.js"></script>
+    
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.activity.js"></script> -->
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.ajax.js"></script> -->
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.csv.js"></script> -->
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.fx.js"></script> -->
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.key.js"></script> -->
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.sheets.js"></script> -->
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.funnel.js"></script> -->
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.gauge.js"></script> -->
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.pie.js"></script> -->
+
+
+    <script src="../src/assets/scripts/index.js"></script>
 </body>
 </html>

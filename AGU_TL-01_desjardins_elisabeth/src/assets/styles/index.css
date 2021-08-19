@@ -5,8 +5,20 @@ body {
     text-align: center;
 }
 
-#horizontal_bar_chart {
+#bipolar_chart {
     width: 800px;
     height: 300px;
     border: 1px solid red;
+}
+
+#horses_shoes {
+    width: 500px;
+    height: 500px;
+    border: 1px solid blue;
+}
+
+#line_chart { 
+    width: 800px;
+    height: 300px;
+    border: 1px solid purple;
 }
