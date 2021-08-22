@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+:root { 
+    --jaune: #f2c84b;
+    --vert_pale: #9fbf2a;
+    --vert_fonce: #4c7326; 
+    --bleu_pale: #629cc0; 
+    --bleu_fonce: #184a8c; 
+    --mauve_pale: #8b5d8a;
+    --mauve_fonce: #5b3580; 
+    --rose: #c24275; 
+    --rouge: #b2232d;
+    --orange_clair: #fea120; 
+    --orange_fonce: #f26a1b; 
+    --blanc: #f5f5f5;
+    --noir: ;
+}
+
 body { 
     font-family: 'Roboto', sans-serif;
     text-align: center;
@@ -18,7 +34,13 @@ body {
 }
 
 #line_chart { 
-    width: 800px;
-    height: 300px;
-    border: 1px solid purple;
+    width: 80%;
+    min-height: 600px;
+    /* border: 1px solid purple; */
+}
+
+#bw_chart {
+    width: 500px;
+    height: 500px;
+    /* border: 1px solid blue; */
 }
