@@ -10,38 +10,54 @@
 <body>
     <header>
         <h1>Travail long 01 : RGraph</h1>
-        <p>ALLO</p>
     </header>
     <main>
         <!-- Canvas -->
 
         <!-- A non-filled Radar chart -->
         <section>
-            <canvas id="radar_chart" width="500" height="400">
+            <h2>Mariages selon les îles</h2>
+
+            <canvas id="horizontal_chart" width="600" height="450">
                 [No canvas support]
             </canvas>
+            
         </section>
+
+
+
         <section>
+            <h2>Activités</h2>
             <canvas id="donut_chart" width="450" height="450">
                 [No canvas support]
             </canvas>
         </section>
         <section>
+            <h2>Population</h2>
             <canvas id="donut_3d_chart" width="600" height="350" style="border: 1px solid #eee">
                 [No canvas support]
             </canvas>
         </section>
 
         <!-- SVG -->
-        <section>
+        <!-- <section>
             <div id="bipolar_chart"></div>
+        </section> -->
+        
+        
+        <!-- Line Chart Black and white -->
+        <section>
+            <h2>Hauteurs des volcans</h2>
+            <div id="bw_chart"></div>
         </section>
        
         <section>
+            <h2>Pluie accumulation par mois</h2>
             <div id="horses_shoes"></div>
         </section>
 
         <section>
+            <h2>Température</h2>
             <div id="line_chart"></div>
         </section>
     </main>
@@ -53,6 +69,7 @@
     <script src="../src/assets/scripts/RGraph.common.effects.js"></script>
     <script src="../src/assets/scripts/RGraph.radar.js"></script>
     <script src="../src/assets/scripts/RGraph.activity.js"></script>
+    <script src="../src/assets/scripts/RGraph.hbar.js"></script>
 
     <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.common.dynamic.js"></script>
     <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.common.tooltips.js"></script>
@@ -64,6 +81,7 @@
     <script src="../src/assets/scripts/RGraph.svg.bar.js"></script>
     <script src="../src/assets/scripts/RGraph.svg.common.core.js"></script>
     <script src="../src/assets/scripts/RGraph.svg.common.tooltips.js"></script>
+    <script src="../src/assets/scripts/RGraph.svg.line.js"></script>
 
     <!-- Remplacer l'emplacement du dossier -->
 
