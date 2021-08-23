@@ -21,26 +21,36 @@ body {
     text-align: center;
 }
 
-#bipolar_chart {
+/* #bipolar_chart {
     width: 800px;
     height: 300px;
     border: 1px solid red;
-}
-
-#horses_shoes {
-    width: 500px;
-    height: 500px;
-    border: 1px solid blue;
-}
-
-#line_chart { 
-    width: 80%;
-    min-height: 600px;
-    /* border: 1px solid purple; */
-}
+} */
 
 #bw_chart {
     width: 500px;
     height: 500px;
     /* border: 1px solid blue; */
 }
+
+#horses_shoes {
+    width: 500px;
+    height: 500px;
+    /* border: 1px solid blue; */
+}
+
+#line_chart { 
+    width: 600px;
+    min-height: 300px;
+    /* border: 1px solid purple; */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* section {
+    width: 80%;
+} */
