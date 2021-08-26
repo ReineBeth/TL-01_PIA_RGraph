@@ -84,18 +84,41 @@ const dessinerRadarChartCanva = () => {
     ]);
 };
 
+
+
+
+
 const dessinerDonutChart = () => {
+
+    // SÉRIEUX, OU SONT LES COULEURS ???
+
+    labels = ['Hamac', 'Hinking', 'Fishing', 'Surfing'];
+    data = ['45%','62%','75%','85%'];
+
     activity = new RGraph.Activity({
         id: 'donut_chart',
+        // backgroundColor: ['f26a1b', '5b3580', '4c7326', 'f5f5f5'],
         min: 0,
         max: 100,
-        value: [67,57,46],
+
+        value: data,
         options: {
+            // backgroundColor: ['f26a1b', '5b3580', '4c7326', 'f5f5f5'],
+
+            // ON N'A PAS LES ICONES, ON SE TROUVE DES IMAGES ???
             icons: [
                 '../images/activityMeter-arrowright.png',
                 '../images/activityMeter-arrowup.png',
                 '../images/activityMeter-arrowdown.png'
             ],
+            labels: labels,
+            tooltips: 'Results:<br />%{key}%',
+            tooltipsFormattedKeyLabels: labels,
+            tooltipsCss: {
+                fontSize: '16pt',
+                textAlign: 'left'
+            },
+
             width: 50,
             marginTop: 5,
             marginBottom: 5,
@@ -103,10 +126,22 @@ const dessinerDonutChart = () => {
             marginRight: 5
         }
     }).grow().responsive([
-        {maxWidth: null, width: 450, height: 450, options: {width: null}, css: {'float':'right'}},
+
+        // VERSION MOBILE
+        {maxWidth: null, width: 450, height: 450, options: {width: null}, css: {'float':'none'}},
+
+        // VERSION BUREAU
         {maxWidth: 650,  width: 250, height: 250, options: {width: 25}, css: {'float':'none'}}
     ]);
 };
+
+
+
+
+
+
+
+
 
 const dessinerDonut3D = () => {
     labels = ['Mavis','Kevin','Luis','June','Olga','Luis','Pete','Bridget'];
@@ -267,16 +302,18 @@ const dessinerHorsesShoes = () => {
 
 
 const dessinerLineChart = () => { 
-        // Some data that is to be shown on the bar chart. For multiple
+    
+    // Some data that is to be shown on the bar chart. For multiple
     // lines it can also be an array of arrays
     // data = [280,45,133,152,278,221,56];
     
-    // An example of the data used by multiple dataset Line charts
     data = [
-        [1,9,8,4,6,5,3],
-        [1,6,5,3,3,8,6]
+        [19, 19, 20, 20, 21, 22, 24, 23, 23, 23, 20, 20],
+        // Il faut additionner la différence
+        [8, 8, 8, 8, 9, 8, 7, 9, 9, 8, 9, 7]
     ];
 
+    
     new RGraph.SVG.Line({
         id: 'line_chart',
         data: data,
@@ -285,27 +322,37 @@ const dessinerLineChart = () => {
             backgroundGridBorder: false,
             xaxis: true,
             yaxis: false,
-            xaxisLabels: ['janvier','février','mars','avril','mai','juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+            xaxisLabels: ['JAN','FÉV','MARS','AVRIL','MAI','JUIN','JUI', 'AOÛT', 'SEPT', 'OCT', 'NOV', 'DÉC'],
             months: ['janvier','février','mars','avril','mai','juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
-            tooltips: '<b>%{property:months[%{index}]}: %{value}%</b>',
+            tooltips: '<b>%{property:months[%{index}]}: %{value}°C</b>',
+
+            // MAIS COMMENT CHANGER LES COULEURS S'ILS SONT DANS LE PATH ???
+            // tooltipsFormattedKeyColors: ['#c24275', '#184a8c'],
+            // tooltipsFormattedKeyColors: [rose, bleuFonce],
+
             tooltipsCss: {
                 backgroundColor: '#333',
                 fontWeight: 'bold',
                 fontSize: '14pt',
-                opacity: 0.85
+                // opacity: 0.5,
             },
             // linewidth: 3,
             marginTop: 45,
-            marginLeft: 25,
+            // marginLeft: 25,
             spline: true,
             filled: true,
-            filledOpacity: 0.5,
+            filledOpacity: 0,
             filledAccumulative: true,
-            linewidth: 0,
+            linewidth: 5,
             title: 'Température moyenne à Hawaï',
-            titleSubtitle: 'The datasets don\'t show anything particularly interesting'
+            titleSubtitle: 'Comparatif entre la température maximum et minimum, en moyenne, par mois',
+            //  tooltipsFormattedKeyColors: ['#c24275', '#184a8c'],
+            // tooltipsFormattedKeyColors: [rose, bleuFonce],
         }
     }).draw();
+
+
+    
 };
 
 
