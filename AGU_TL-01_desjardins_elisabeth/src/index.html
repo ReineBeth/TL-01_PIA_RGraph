@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/AGU_TL-01_desjardins_elisabeth/src/assets/styles/index.css">
+    <link rel="stylesheet" href="/src/assets/styles/index.css">
     <title>RGraph</title>
 </head>
 <body>
     <header>
-        <h1>Travail long 01 : RGraph</h1>
+        <h1>Hawaï <br> Quelques données intéressantes</h1>
     </header>
     <main>
         <!-- Canvas -->
@@ -25,9 +25,11 @@
 
         <section>
             <h2>Activités</h2>
+            <h3>(Les activités populaires selon les offres des compagnies touristiques)</h3>
             <canvas id="donut_chart" width="450" height="450">
                 [No canvas support]
             </canvas>
+            <p><a href="https://www.gohawaii.com/fr/experiences?f%5B0%5D=field_categories%3A551&f%5B1%5D=field_categories%3A596&f%5B2%5D=field_categories%3A546&f%5B3%5D=field_categories%3A46&modified=1#listings" target="_blank" title="Lien vers le site The Hawaiian Islands ">Source pour les activités</a></p>
         </section>
 
 
@@ -46,8 +48,9 @@
         
         <!-- Line Chart Black and white -->
         <section>
-            <h2>Hauteurs des volcans</h2>
+            <h2>Hauteurs des volcans en mètres</h2>
             <div id="bw_chart"></div>
+            <p><a href="https://www.to-hawaii.com/fr/volcans.php" target="_blank" title="Lien vers le site To-Hawaii.com">Source pour les volcans</a></p>
         </section>
        
         <section>
@@ -58,36 +61,38 @@
         <section>
             <h2>Température</h2>
             <div id="line_chart"></div>
-            <p><a href="https://www.myfiji.com/fiji-travel-guides/about-fiji/weather-in-fiji/hawaii-weather/" target="_blank">Source pour la température</a></p>
+            <p><a href="https://fr.wikipedia.org/wiki/Hawa%C3%AF#Climat" target="_blank" title="Lien vers la page Wikipédia - Climat">Source pour la température</a></p>
         </section>
     </main>
     <footer>
-
+        <p>PIIA</p>
+        <p>Émilie Caron et Élisabeth Desjardins</p>
+        <p><time datetime="2021-09-03">3 septembre 2021</time></p>
     </footer>
 
-    <script src="../src/assets/scripts/RGraph.common.core.js"></script>
-    <script src="../src/assets/scripts/RGraph.common.effects.js"></script>
-    <script src="../src/assets/scripts/RGraph.radar.js"></script>
-    <script src="../src/assets/scripts/RGraph.activity.js"></script>
-    <script src="../src/assets/scripts/RGraph.hbar.js"></script>
+    <script src="/src/assets/scripts/RGraph.common.core.js"></script>
+    <script src="/src/assets/scripts/RGraph.common.effects.js"></script>
+    <script src="/src/assets/scripts/RGraph.radar.js"></script>
+    <script src="/src/assets/scripts/RGraph.activity.js"></script>
+    <script src="/src/assets/scripts/RGraph.hbar.js"></script>
 
-    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.common.dynamic.js"></script>
-    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.common.tooltips.js"></script>
-    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.pie.js"></script>
+    <script src="/src/assets/scripts/RGraph.common.dynamic.js"></script>
+    <script src="/src/assets/scripts/RGraph.common.tooltips.js"></script>
+    <script src="/src/assets/scripts/RGraph.pie.js"></script>
    
     <!-- SVG Horizontal Bar chart API reference -->
 
-    <script src="../src/assets/scripts/RGraph.svg.hbar.js"></script>
-    <script src="../src/assets/scripts/RGraph.svg.bar.js"></script>
-    <script src="../src/assets/scripts/RGraph.svg.common.core.js"></script>
-    <script src="../src/assets/scripts/RGraph.svg.common.tooltips.js"></script>
-    <script src="../src/assets/scripts/RGraph.svg.line.js"></script>
+    <script src="/src/assets/scripts/RGraph.svg.hbar.js"></script>
+    <script src="/src/assets/scripts/RGraph.svg.bar.js"></script>
+    <script src="/src/assets/scripts/RGraph.svg.common.core.js"></script>
+    <script src="/src/assets/scripts/RGraph.svg.common.tooltips.js"></script>
+    <script src="/src/assets/scripts/RGraph.svg.line.js"></script>
 
     <!-- Remplacer l'emplacement du dossier -->
 
-    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.bipolar.js"></script>
-    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.horseshoe.js"></script>
-    <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.line.js"></script>
+    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.bipolar.js"></script> -->
+    <script src="/src/assets/scripts/RGraph.svg.horseshoe.js"></script>
+    <script src="/src/assets/scripts/RGraph.svg.line.js"></script>
     
     <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.activity.js"></script> -->
     <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.ajax.js"></script> -->
@@ -100,6 +105,6 @@
     <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.pie.js"></script> -->
 
 
-    <script src="../src/assets/scripts/index.js"></script>
+    <script src="/src/assets/scripts/index.js"></script>
 </body>
 </html>

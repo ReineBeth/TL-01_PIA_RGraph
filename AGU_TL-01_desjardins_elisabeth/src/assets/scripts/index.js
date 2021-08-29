@@ -25,6 +25,9 @@ const blanc = getComputedStyle(document.documentElement).getPropertyValue('--bla
 
 const noir = getComputedStyle(document.documentElement).getPropertyValue('--noir');
 
+
+
+
 const dessinerHorizontalChart = () => {
         // The labels for the chart are not added by giving them to the
     // chart but manually adding text to the chart.
@@ -78,45 +81,50 @@ const dessinerHorizontalChart = () => {
             });
         }
     }).grow().responsive([
+        
+        // VERSION MOBILE
         {maxWidth: null,width:600,height: 350,parentCss:{'float':'right'}},
+         // VERSION BUREAU
         {maxWidth: 800,width:400,height: 300,parentCss:{'float':'none'}}
     ]);
-}
+};
 
 
+
+// ACTIVITÉS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerDonutChart = () => {
 
-    // SÉRIEUX, OU SONT LES COULEURS ???
-
-    let labels = ['Hamac', 'Hinking', 'Fishing', 'Surfing'];
-    data = ['45%','62%','75%','85%'];
+    // Pourquoi lorsque j'ajoute une 5e activités, tout devient translucide ????
+    let labels = ['Sports d\'eau 47%', 'Visites guidées 15%', 'Culture, histoire et art 14%', 'Dîner-spectacle danse Luau 13%'];
+    let data = ['47%','15%','14%','13%'];
 
     activity = new RGraph.Activity({
         id: 'donut_chart',
-        // backgroundColor: ['f26a1b', '5b3580', '4c7326', 'f5f5f5'],
         min: 0,
         max: 100,
-
         value: data,
         options: {
-            backgroundColor: '#f9f9f9', //change le fond (noir)
-            //backgroundRingsColors: ['red', 'blue', 'white', 'yellow'], //change la couleur derriere les valeurs
-            colors : [orangeFonce, vertFonce, bleuPale, bleuFonce],
+            colors : [bleuFonce, vertFonce, mauvePale, rose],
+            backgroundColor: '#ffffff',
 
-            // ON N'A PAS LES ICONES, ON SE TROUVE DES IMAGES ???
+            // ON N'A PAS LES ICONES, ON SE TROUVE DES IMAGES ????????????????????????????
             // icons: [
             //     '../images/activityMeter-arrowright.png',
             //     '../images/activityMeter-arrowup.png',
             //     '../images/activityMeter-arrowdown.png'
             // ],
+            
             labels: labels,
-            labelsColor: '#000',
-            tooltips: 'Results:<br />%{key}%',
-            tooltipsFormattedKeyLabels: labels,
-            tooltipsCss: {
-                fontSize: '16pt',
-                textAlign: 'left'
-            },
+            labelsBold:true,
+            labelsColor: noir,
+
+            // BEAUCOUP DE DIFFICULTÉS à mettre ça beau et clean!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // tooltips: 'Résultats:%{key}',
+            // tooltipsFormattedKeyLabels: labels,
+            // tooltipsCss: {
+            //     fontSize: '16pt',
+            //     textAlign: 'left'
+            // },
 
             width: 50,
             marginTop: 5,
@@ -136,9 +144,7 @@ const dessinerDonutChart = () => {
 
 
 
-
-
-
+// POPULATIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 const dessinerDonut3D = () => {
     // J'ai pris les termes utilisé sur wikipédia. Je ne sais pas si utilisé les termes blancs et noirs c'est la bonne chose ou si ya un meilleur terme. 
@@ -164,17 +170,23 @@ const dessinerDonut3D = () => {
             colors : [orangeClair, vertFonce, bleuFonce, mauveFonce, bleuPale]
         }
     }).draw().responsive([
+
+        // Comment le rendre plus grand en version bureau?
+        
+        // VERSION BUREAU
         {maxWidth: null,width:600,height:350,options:{radius: 100,labelsList: false, labels:labels,title:'',tooltips:null}},
+        
+        // VERSION MOBILE - Les Labels disparaissent !
         {maxWidth: 900,width:400,height:250,options:{radius: 100,labels: null,title: 'Population Hawaii',tooltips:labels}}
     ]);
 };
 
 
-
+// LES HAUTEURS DES VOLCANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerLineChartBlackWhite = () => {
     
     // This is the data for the Line chart. A simple JavaScript array.
-    data = [500,600,800,720,900,1100];
+    data = [1000,1246,1600,3000,4169,4200];
 
     // Create the Line chart. Give it the data that's defined above.
     // There's nothing notable about the configuration.
@@ -182,18 +194,23 @@ const dessinerLineChartBlackWhite = () => {
         id: 'bw_chart',
         data: data,
         options: {
-            colors: ['#00AD4B'],
+            colors: [vertPale],
             backgroundGrid: false,
-            xaxisLabels: ['Febuary','March','April','May','June','July'],
+            xaxisLabels: ['Mahukona','Kilauea','Kohala','Loihi','Mauna Loa','Mauna Kea'],
             xaxisTickmarks: false,
-            yaxisTickmarks: false,
+            yaxisTickmarks: true,
             backgroundGridColor: '#999',
             tickmarksStyle: 'circle',
             marginLeft: 75
         }
     }).responsive([
-        {maxWidth:null,width:650,height:250,options:{linewidth:5,tickmarksSize: 8,textSize: 16,marginInner: 50,'data-textsize': 20},css:{'float':'right'}},
-        {maxWidth:900,width:400,height:200,options:{linewidth:3,tickmarksSize: 4,textSize: 10,marginInner: 30,'data-textsize': 14},css:{'float':'none'}}
+
+        // VERSION BUREAU
+        {maxWidth:null,width:900,height:500,options:{linewidth:5,tickmarksSize: 8,textSize: 16,marginInner: 50,'data-textsize': 20},css:{'float':'none'}},
+        
+        // VERSION MOBILE
+        {maxWidth:900,width:600,height:350,options:{linewidth:3,tickmarksSize: 4,textSize: 12,marginInner: 30,'data-textsize': 14},css:{'float':'none'}}
+
     ]).on('draw', function (obj)
     {
         var textsize = obj.get('data-textsize');
@@ -202,6 +219,8 @@ const dessinerLineChartBlackWhite = () => {
         // above the last datapoint.
         label = RGraph.SVG.numberFormat({
             
+            // COMMENT FAIRE POUR  QUE TOUTES LES HAUTEURS APPARAISSENT, PAS SEULEMENT LA DERNIÈRES ???????
+
             // The value of the last point on the chart
             num: obj.data[0][5],
             
@@ -219,6 +238,7 @@ const dessinerLineChartBlackWhite = () => {
         // point. Unlike the canvas libraries the SVG text function
         // doesn't have to be inside the draw event because SVG doesn't
         // clear itself like canvas does when things need redrawing.
+
         textLabel = RGraph.SVG.text({
             object: obj,
             parent: obj.svg,
@@ -236,6 +256,8 @@ const dessinerLineChartBlackWhite = () => {
     }).draw();
 };
 
+
+// ACCUMULATIONS PLUIE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerHorsesShoes = () => {
     horseshoe = new RGraph.SVG.Horseshoe({
         id: 'horses_shoes',
@@ -258,74 +280,56 @@ const dessinerHorsesShoes = () => {
 };
 
 
-
-const dessinerLineChart = () => { 
-    
-    // Some data that is to be shown on the bar chart. For multiple
-    // lines it can also be an array of arrays
-    // data = [280,45,133,152,278,221,56];
+// TEMPÉRATURE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const dessinerLineChartTemperature = () => { 
     
     data = [
         [19, 19, 20, 20, 21, 22, 24, 23, 23, 23, 20, 20],
-        // Il faut additionner la différence
         [8, 8, 8, 8, 9, 8, 7, 9, 9, 8, 9, 7]
     ];
 
-    
     new RGraph.SVG.Line({
         id: 'line_chart',
         data: data,
         options: {
+            colors: [bleuPale, rose], 
             backgroundGridVlines: false,
             backgroundGridBorder: false,
             xaxis: true,
-            yaxis: false,
-            xaxisLabels: ['JAN','FÉV','MARS','AVRIL','MAI','JUIN','JUI', 'AOÛT', 'SEPT', 'OCT', 'NOV', 'DÉC'],
+            yaxis: true,
+            xaxisLabels: ['JAN','FEV','MAR','AVR','MAI','JUI','JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC'],
             months: ['janvier','février','mars','avril','mai','juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
             tooltips: '<b>%{property:months[%{index}]}: %{value}°C</b>',
-
-            // MAIS COMMENT CHANGER LES COULEURS S'ILS SONT DANS LE PATH ???
-            // tooltipsFormattedKeyColors: ['#c24275', '#184a8c'],
-            // tooltipsFormattedKeyColors: [rose, bleuFonce], 
-
             tooltipsCss: {
                 backgroundColor: '#333',
                 fontWeight: 'bold',
                 fontSize: '14pt',
-                // opacity: 0.5,
+                opacity: 0.5,
             },
-            // linewidth: 3,
+            linewidth: 3,
             marginTop: 45,
-            // marginLeft: 25,
+            marginLeft: 25,
             spline: true,
             filled: true,
             filledOpacity: 0,
             filledAccumulative: true,
-            linewidth: 5,
-            title: 'Température moyenne à Hawaï',
-            titleSubtitle: 'Comparatif entre la température maximum et minimum, en moyenne, par mois',
-            //  tooltipsFormattedKeyColors: ['#c24275', '#184a8c'],
-            // tooltipsFormattedKeyColors: [rose, bleuFonce],
-            // colorsStroke: [mauveFonce, mauvePale], 
-            colors: [mauvePale, bleuPale], 
+            title: 'Hawaï - Température mensuelle moyenne en Celsius',
+            titleSubtitle: 'Comparatif entre les températures les plus chaudes et fraîches',
         }
-    }).draw();
-
-
+    }).draw();  
     
+    // COMMENT LE RENDRE RESPONSIVE ????? PLUS GROS EN VERSION BUREAU
+
 };
 
 
-
-
 const main = () => {
-    
     dessinerHorizontalChart(); 
     dessinerDonutChart();
     dessinerDonut3D();
     // dessinerHorizontalBarChartSVG();
     dessinerHorsesShoes();
-    dessinerLineChart(); 
+    dessinerLineChartTemperature(); 
     dessinerLineChartBlackWhite();
 };
 
