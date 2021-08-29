@@ -25,19 +25,17 @@ const blanc = getComputedStyle(document.documentElement).getPropertyValue('--bla
 
 const noir = getComputedStyle(document.documentElement).getPropertyValue('--noir');
 
-
-const dessinerRadarChartCanva = () => {
-
-	// The labels for the chart are not added by giving them to the
+const dessinerHorizontalChart = () => {
+        // The labels for the chart are not added by giving them to the
     // chart but manually adding text to the chart.
-    labels = ['PHP','Python','C#','Java','MySQL','Oracle','JSP','MS SQL Server','Ruby'];
+    let labels = ['Honolulu', 'Hawaii', 'Kauai', 'Maui' ];
 
     // Create the Horizontal Bar chart and configure it. With there
     // being no labels on the left-hand-side the margin autofit
     // will make the left margin zero
     new RGraph.HBar({
         id: 'horizontal_chart',
-        data: [86,75,71,65,60,55,53,51,45],
+        data: [67, 16, 14, 3],
         options: {
             backgroundGrid: false,
             xaxis: false,
@@ -45,12 +43,13 @@ const dessinerRadarChartCanva = () => {
             xaxisScale: false,
             labelsAbove: true,
             labelsAboveUnitsPost: '%',
-            colors: ['green'],
+            colors: [mauveFonce],
             shadow: true,
             shadowColor: '#ddd',
             shadowOffsetx: 2,
             shadowOffsety: 2,
-            tooltips: '<i style="position: relative; top: -5px">Usage worldwide:</i> <span style="font-size: 26pt; ">%{value}%</span>',
+            
+            tooltips: '<i style="position: relative; top: -5px">Pourcentage de mariage dans l\'état d\'Hawaii :</i> <span style="font-size: 26pt; ">%{value}%</span>',
             tooltipsCss: {
                 fontSize: '14pt'
             },
@@ -82,17 +81,14 @@ const dessinerRadarChartCanva = () => {
         {maxWidth: null,width:600,height: 350,parentCss:{'float':'right'}},
         {maxWidth: 800,width:400,height: 300,parentCss:{'float':'none'}}
     ]);
-};
-
-
-
+}
 
 
 const dessinerDonutChart = () => {
 
     // SÉRIEUX, OU SONT LES COULEURS ???
 
-    labels = ['Hamac', 'Hinking', 'Fishing', 'Surfing'];
+    let labels = ['Hamac', 'Hinking', 'Fishing', 'Surfing'];
     data = ['45%','62%','75%','85%'];
 
     activity = new RGraph.Activity({
@@ -103,15 +99,18 @@ const dessinerDonutChart = () => {
 
         value: data,
         options: {
-            // backgroundColor: ['f26a1b', '5b3580', '4c7326', 'f5f5f5'],
+            backgroundColor: '#f9f9f9', //change le fond (noir)
+            //backgroundRingsColors: ['red', 'blue', 'white', 'yellow'], //change la couleur derriere les valeurs
+            colors : [orangeFonce, vertFonce, bleuPale, bleuFonce],
 
             // ON N'A PAS LES ICONES, ON SE TROUVE DES IMAGES ???
-            icons: [
-                '../images/activityMeter-arrowright.png',
-                '../images/activityMeter-arrowup.png',
-                '../images/activityMeter-arrowdown.png'
-            ],
+            // icons: [
+            //     '../images/activityMeter-arrowright.png',
+            //     '../images/activityMeter-arrowup.png',
+            //     '../images/activityMeter-arrowdown.png'
+            // ],
             labels: labels,
+            labelsColor: '#000',
             tooltips: 'Results:<br />%{key}%',
             tooltipsFormattedKeyLabels: labels,
             tooltipsCss: {
@@ -141,77 +140,36 @@ const dessinerDonutChart = () => {
 
 
 
-
-
 const dessinerDonut3D = () => {
-    labels = ['Mavis','Kevin','Luis','June','Olga','Luis','Pete','Bridget'];
+    // J'ai pris les termes utilisé sur wikipédia. Je ne sais pas si utilisé les termes blancs et noirs c'est la bonne chose ou si ya un meilleur terme. 
+    let labels = ['Asiatiques','Blancs','Océaniens','Noirs','Autres'];
 
     // Create the Pie chart, set the donut variant and the rest of the
     // configuration. The variant property is what sets the chart to
     // be a Donut chart instead of a regular Pie chart.
     new RGraph.Pie({
         id: 'donut_3d_chart',
-        data: [4,8,6,3,5,2,5],
+        data: [38.60, 24.74, 9.96, 1.57, 25.13],
         options: {
             shadow: true,
-            shadowOffsetx: 0,
-            shadowOffsety: 5,
+            shadowOffsetx: 15,
+            shadowOffsety: 15,
             shadowColor: '#aaa',
             variant: 'donut3d',
             labels: labels,
             labelsSticksLength: 15,
             labelsSticksLinewidth: 2,
             textAccessible: false,
-            colorsStroke: 'transparent'
+            colorsStroke: 'transparent',
+            colors : [orangeClair, vertFonce, bleuFonce, mauveFonce, bleuPale]
         }
     }).draw().responsive([
-        {maxWidth: null,width:600,height:350,options:{radius: 100,labelsList: true, labels:labels,title:'',tooltips:null}},
-        {maxWidth: 900,width:400,height:250,options:{radius: 90,labels: null,title: '(Click for labels)',tooltips:labels}}
+        {maxWidth: null,width:600,height:350,options:{radius: 100,labelsList: false, labels:labels,title:'',tooltips:null}},
+        {maxWidth: 900,width:400,height:250,options:{radius: 100,labels: null,title: 'Population Hawaii',tooltips:labels}}
     ]);
 };
 
 
-const dessinerHorizontalBarChartSVG = () => {
-    labels = ['Monday','Tuesday','Wednesday'];
-
-    bipolar = new RGraph.SVG.Bipolar({
-        id: 'bipolar_chart',
-        left: [[8,5],[6,3],[4,8]],
-        right: [[1,2],[8,2],[6,5]],
-        //left: [4,8,6],
-        //right: [4,8,5],
-        options: {
-            backgroundGridHlines: false,
-            backgroundGridBorder: false,
-            title: 'A Bipolar chart',
-            titleSubtitle: 'A subtitle for the chart that was generated on Sunday',
-            titleSubtitleItalic: true,
-            marginTop: 50,
-            colors: ['red','black'],
-            yaxisLabels: '%{global:labels[%{index}]}',
-            yaxisTextBold: true,
-            yaxisTextItalic: true,
-            xaxis: false,
-            yaxisColor: '#aaa',
-            shadow: true,
-            tooltips: 'Results:%{key}',
-            tooltipsFormattedUnitsPre: '$',
-            tooltipsFormattedUnitsPost: '',
-            tooltipsFormattedDecimals: 2,
-            tooltipsFormattedKeyLabels: ['Berty','Charles'],
-            tooltipsCss: {
-                backgroundColor: '#333',
-                fontWeight: 'bold',
-                fontSize: '14pt',
-                opacity: 0.85
-            }
-        }
-    }).draw().responsive([
-        {maxWidth: 700, width: 400, height: 200,options: {textSize: 8, marginInner: 4}},
-        {maxWidth: 950, width: 600, height: 250,options: {textSize: 12, marginInner: 3}},
-        {maxWidth: null, width: 700, height: 350,options: {textSize: 16, marginInner: 5}}
-    ]);
-};
 
 const dessinerLineChartBlackWhite = () => {
     
@@ -328,7 +286,7 @@ const dessinerLineChart = () => {
 
             // MAIS COMMENT CHANGER LES COULEURS S'ILS SONT DANS LE PATH ???
             // tooltipsFormattedKeyColors: ['#c24275', '#184a8c'],
-            // tooltipsFormattedKeyColors: [rose, bleuFonce],
+            // tooltipsFormattedKeyColors: [rose, bleuFonce], 
 
             tooltipsCss: {
                 backgroundColor: '#333',
@@ -348,6 +306,8 @@ const dessinerLineChart = () => {
             titleSubtitle: 'Comparatif entre la température maximum et minimum, en moyenne, par mois',
             //  tooltipsFormattedKeyColors: ['#c24275', '#184a8c'],
             // tooltipsFormattedKeyColors: [rose, bleuFonce],
+            // colorsStroke: [mauveFonce, mauvePale], 
+            colors: [mauvePale, bleuPale], 
         }
     }).draw();
 
@@ -360,7 +320,7 @@ const dessinerLineChart = () => {
 
 const main = () => {
     
-    dessinerRadarChartCanva(); 
+    dessinerHorizontalChart(); 
     dessinerDonutChart();
     dessinerDonut3D();
     // dessinerHorizontalBarChartSVG();
