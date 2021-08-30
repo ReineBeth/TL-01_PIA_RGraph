@@ -1,35 +1,24 @@
 // COULEURS  
 const jaune = getComputedStyle(document.documentElement).getPropertyValue('--jaune');
-
 const vertPale = getComputedStyle(document.documentElement).getPropertyValue('--vert_pale');
-
 const vertFonce = getComputedStyle(document.documentElement).getPropertyValue('--vert_fonce');
-
 const bleuPale = getComputedStyle(document.documentElement).getPropertyValue('--bleu_pale');
-
 const bleuFonce = getComputedStyle(document.documentElement).getPropertyValue('--bleu_fonce');
-
 const mauvePale = getComputedStyle(document.documentElement).getPropertyValue('--mauve_pale');
-
 const mauveFonce = getComputedStyle(document.documentElement).getPropertyValue('--mauve_fonce');
-
 const rose = getComputedStyle(document.documentElement).getPropertyValue('--rose');
-
 const rouge = getComputedStyle(document.documentElement).getPropertyValue('--rouge');
-
 const orangeClair = getComputedStyle(document.documentElement).getPropertyValue('--orange_clair');
-
 const orangeFonce = getComputedStyle(document.documentElement).getPropertyValue('--orange_fonce');
-
 const blanc = getComputedStyle(document.documentElement).getPropertyValue('--blanc');
-
 const noir = getComputedStyle(document.documentElement).getPropertyValue('--noir');
 
-
-
+//LES ÉLÉMENTS 
+const navigationPrincipale = document.querySelectorAll('.navigation_principale a'); 
+const sectionElement = document.querySelectorAll('section');
 
 const dessinerHorizontalChart = () => {
-        // The labels for the chart are not added by giving them to the
+    // The labels for the chart are not added by giving them to the
     // chart but manually adding text to the chart.
     let labels = ['Honolulu', 'Hawaii', 'Kauai', 'Maui' ];
 
@@ -333,4 +322,23 @@ const main = () => {
     dessinerLineChartBlackWhite();
 };
 
-main(); 
+let dernierIndex = 0;
+
+for(let index = 0; index < sectionElement.length; index++) { 
+
+	navigationPrincipale[index].addEventListener('click', displaySection);
+
+    function displaySection() {
+        sectionElement[dernierIndex].style.display = 'none'; 
+        navigationPrincipale[dernierIndex].classList.remove = 'active';
+            
+        sectionElement[index].style.display = 'block';
+        navigationPrincipale[index].classList.add = 'active';
+        
+        dernierIndex = index; 
+        main();
+    }
+}
+
+
+

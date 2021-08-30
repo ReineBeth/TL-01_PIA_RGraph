@@ -17,6 +17,7 @@
 }
 
 body { 
+    background: var(--blanc);
     font-family: 'Roboto', sans-serif;
     text-align: center;
     display: flex;
@@ -24,51 +25,92 @@ body {
     height: 100vh;
 }
 
-main {
-    flex-grow: 1;
-    /* display: flex; */
-    /* flex-wrap: wrap; */
+a { 
+    text-decoration: none;
+    outline: none;
 }
 
-footer {
+li {
+    list-style-type: none;
+}
+
+header {
+    background: var(--bleu_fonce);
+    color: var(--blanc);
+}
+
+h1 { 
+    font-size: 3em;
+    padding: 0.8em;
+}
+
+.navigation_principale { 
     display: flex;
     justify-content: space-around;
-}
-/* #bipolar_chart {
-    width: 800px;
-    height: 300px;
-    border: 1px solid red;
-} */
-
-#bw_chart {
-    width: 500px;
-    height: 500px;
-    /* border: 1px solid blue; */
+    flex-wrap: wrap;
+    font-size: 1.4em;
+    padding: 2em;
 }
 
-#horses_shoes {
-    width: 500px;
-    height: 500px;
-    /* border: 1px solid blue; */
+.navigation_principale li {
+    margin: 0.5em;
 }
 
-#line_chart { 
-    width: 600px;
-    height: 300px;
-   
-    /* border: 1px solid purple; */
+.navigation_principale a{
+    color: var(--blanc);
+    font-weight: 700;
+    padding: 0.5em;
 }
 
 
+.navigation_principale a:hover{
+    color: var(--orange_clair);
+    text-decoration: underline;
+}
 
+.navigation_principale a:focus{
+    color: var(--orange_clair);
+    border: 0.2em dashed var(--orange_clair);
+    border-radius: 0.2em;
+}
+
+.active { 
+    color: var(--orange_clair);
+    border: red 10px solid;
+}
 main {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-grow: 1;
 }
 
 section {
     width: 100%;
     margin: 50px auto;
+    display: none;
+}
+
+footer {
+    background: var(--bleu_fonce);
+    color: var(--blanc);
+    display: flex;
+    justify-content: space-around;
+    padding: 1em;
+}
+
+#bw_chart {
+    width: 500px;
+    height: 500px;
+}
+
+#horses_shoes {
+    width: 500px;
+    height: 500px;
+}
+
+#line_chart { 
+    width: 600px;
+    height: 300px;
 }
 

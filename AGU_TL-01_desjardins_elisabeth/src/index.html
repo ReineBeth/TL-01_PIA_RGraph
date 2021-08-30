@@ -10,6 +10,16 @@
 <body>
     <header>
         <h1>Hawaï <br> Quelques données intéressantes</h1>
+        <nav>
+            <ul class="navigation_principale">
+                <li><a href="#">Mariage</a></li>
+                <li><a href="#">Activité</a></li>
+                <li><a href="#">Population</a></li>
+                <li><a href="#">Volcans</a></li>
+                <li><a href="#">Pluie</a></li>
+                <li><a href="#">Température</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <!-- Canvas -->
@@ -21,9 +31,10 @@
             <canvas id="horizontal_chart" width="600" height="450">
                 [No canvas support]
             </canvas>
+            <p><a href="https://health.hawaii.gov/vitalstatistics/preliminary-marriage-total-same-sex/" target="_blank" title="Lien vers le site gouvernement d'Hawaii">Source pour les mariages</a></p>
         </section>
 
-        <section>
+        <section class="dispay_block">
             <h2>Activités</h2>
             <h3>(Les activités populaires selon les offres des compagnies touristiques)</h3>
             <canvas id="donut_chart" width="450" height="450">
@@ -38,15 +49,9 @@
             <canvas id="donut_3d_chart" width="600" height="350">
                 [No canvas support]
             </canvas>
+            <p><a href="https://fr.wikipedia.org/wiki/Hawa%C3%AF" target="_blank" title="Lien vers le wikipédia francophone d'Hawaii">Source pour la population</a></p>
         </section>
-
-        <!-- SVG -->
-        <!-- <section>
-            <div id="bipolar_chart"></div>
-        </section> -->
         
-        
-        <!-- Line Chart Black and white -->
         <section>
             <h2>Hauteurs des volcans en mètres</h2>
             <div id="bw_chart"></div>
