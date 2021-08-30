@@ -14,10 +14,10 @@ const blanc = getComputedStyle(document.documentElement).getPropertyValue('--bla
 const noir = getComputedStyle(document.documentElement).getPropertyValue('--noir');
 
 //LES ÉLÉMENTS 
-const navigationPrincipale = document.querySelectorAll('.navigation_principale a'); 
+const navigationPrincipale = document.querySelectorAll('.navigation_principale button'); 
 const sectionElement = document.querySelectorAll('section');
 
-const dessinerHorizontalChart = () => {
+const dessinerGraphiqueMariage = () => {
     // The labels for the chart are not added by giving them to the
     // chart but manually adding text to the chart.
     let labels = ['Honolulu', 'Hawaii', 'Kauai', 'Maui' ];
@@ -26,7 +26,7 @@ const dessinerHorizontalChart = () => {
     // being no labels on the left-hand-side the margin autofit
     // will make the left margin zero
     new RGraph.HBar({
-        id: 'horizontal_chart',
+        id: 'graphique_mariage',
         data: [67, 16, 14, 3],
         options: {
             backgroundGrid: false,
@@ -41,9 +41,15 @@ const dessinerHorizontalChart = () => {
             shadowOffsetx: 2,
             shadowOffsety: 2,
             
-            tooltips: '<i style="position: relative; top: -5px">Pourcentage de mariage dans l\'état d\'Hawaii :</i> <span style="font-size: 26pt; ">%{value}%</span>',
+            // tooltips: `<i style="position: relative; top: -5px">Pourcentage de mariage dans l'état d'Hawaii :</i> <span style="font-size: 26pt; ">%{value}%</span>`,
+
+            //C'est pas dynamique mais je préfère quand le tooltips varie d'une ligne à l'autre. :) (surtout pour qu'on puisse voir que la dernière ligne est maui)
+            tooltips: ['Honolulu : 67%', 'Hawaii : 16%', 'Kauai : 14%', 'Maui: 3%'],
             tooltipsCss: {
-                fontSize: '14pt'
+                fontSize: '14pt',
+                backgroundColor: bleuPale,
+                color: noir,
+                border: `1px solid ${bleuFonce}`,
             },
             highlightFill: 'Gradient(rgba(255,255,255,0):white)',
             highlightStroke: 'Gradient(rgba(255,255,255,0):white)'
@@ -71,24 +77,24 @@ const dessinerHorizontalChart = () => {
         }
     }).grow().responsive([
         
-        // VERSION MOBILE
+        // VERSION BUREAU
         {maxWidth: null,width:600,height: 350,parentCss:{'float':'right'}},
-         // VERSION BUREAU
-        {maxWidth: 800,width:400,height: 300,parentCss:{'float':'none'}}
+        // VERSION MOBILE
+       {maxWidth: 800,width:400,height: 300,parentCss:{'float':'none'}}
     ]);
 };
 
 
 
 // ACTIVITÉS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const dessinerDonutChart = () => {
+const dessinerGraphiqueActivites = () => {
 
     // Pourquoi lorsque j'ajoute une 5e activités, tout devient translucide ????
     let labels = ['Sports d\'eau 47%', 'Visites guidées 15%', 'Culture, histoire et art 14%', 'Dîner-spectacle danse Luau 13%'];
     let data = ['47%','15%','14%','13%'];
 
     activity = new RGraph.Activity({
-        id: 'donut_chart',
+        id: 'graphique_activites',
         min: 0,
         max: 100,
         value: data,
@@ -135,7 +141,7 @@ const dessinerDonutChart = () => {
 
 // POPULATIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-const dessinerDonut3D = () => {
+const dessinerGraphiquePopulation = () => {
     // J'ai pris les termes utilisé sur wikipédia. Je ne sais pas si utilisé les termes blancs et noirs c'est la bonne chose ou si ya un meilleur terme. 
     let labels = ['Asiatiques','Blancs','Océaniens','Noirs','Autres'];
 
@@ -143,7 +149,7 @@ const dessinerDonut3D = () => {
     // configuration. The variant property is what sets the chart to
     // be a Donut chart instead of a regular Pie chart.
     new RGraph.Pie({
-        id: 'donut_3d_chart',
+        id: 'graphique_population',
         data: [38.60, 24.74, 9.96, 1.57, 25.13],
         options: {
             shadow: true,
@@ -154,12 +160,15 @@ const dessinerDonut3D = () => {
             labels: labels,
             labelsSticksLength: 15,
             labelsSticksLinewidth: 2,
-            textAccessible: false,
+            textAccessible: false, //devrait-on mettre le text accessible ? 
+            textSize: 14,
             colorsStroke: 'transparent',
-            colors : [orangeClair, vertFonce, bleuFonce, mauveFonce, bleuPale]
+            colors: [orangeClair, vertFonce, bleuFonce, mauveFonce, bleuPale],
+            exploded: [8, 8, 8, 8, 8], //J'ai découvert exploded, je ne sais pas si j'aime mais je me dis qu'il y a quelque chose de cool avec ca. 
+            
         }
     }).draw().responsive([
-
+        
         // Comment le rendre plus grand en version bureau?
         
         // VERSION BUREAU
@@ -172,15 +181,15 @@ const dessinerDonut3D = () => {
 
 
 // LES HAUTEURS DES VOLCANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const dessinerLineChartBlackWhite = () => {
+const dessinerGraphiqueVolcans = () => {
     
     // This is the data for the Line chart. A simple JavaScript array.
-    data = [1000,1246,1600,3000,4169,4200];
+    let data = [1000,1246,1600,3000,4169,4200];
 
     // Create the Line chart. Give it the data that's defined above.
     // There's nothing notable about the configuration.
     line = new RGraph.SVG.Line({
-        id: 'bw_chart',
+        id: 'graphique_volcans',
         data: data,
         options: {
             colors: [vertPale],
@@ -188,40 +197,44 @@ const dessinerLineChartBlackWhite = () => {
             xaxisLabels: ['Mahukona','Kilauea','Kohala','Loihi','Mauna Loa','Mauna Kea'],
             xaxisTickmarks: false,
             yaxisTickmarks: true,
+            yaxisLabelsCount: 9,
+            yaxisScaleUnitsPost: 'm',
             backgroundGridColor: '#999',
-            tickmarksStyle: 'circle',
-            marginLeft: 75
+            tickmarksStyle: 'filledcircle',
+            marginLeft: 75,
+            shadow: true,
+            tooltips: [1000,1246,1600,3000,4169,4200],
+            tooltipsCss: {
+                fontSize: '14pt',
+                backgroundColor: orangeClair,
+                color: noir,
+                border: `1px solid ${orangeFonce}`,
+            },
         }
     }).responsive([
 
         // VERSION BUREAU
-        {maxWidth:null,width:900,height:500,options:{linewidth:5,tickmarksSize: 8,textSize: 16,marginInner: 50,'data-textsize': 20},css:{'float':'none'}},
+        {maxWidth:null,width:900,height:500,options:{linewidth:5,tickmarksSize: 8,textSize: 16,marginInner: 50,'data-textsize': 20, marginLeft: 100},css:{'float':'none'}},
         
         // VERSION MOBILE
         {maxWidth:900,width:600,height:350,options:{linewidth:3,tickmarksSize: 4,textSize: 12,marginInner: 30,'data-textsize': 14},css:{'float':'none'}}
 
-    ]).on('draw', function (obj)
-    {
+    ]).on('draw', function (obj) {
         var textsize = obj.get('data-textsize');
 
         // Format the text that is about to be added to the Line chart
         // above the last datapoint.
-        label = RGraph.SVG.numberFormat({
-            
-            // COMMENT FAIRE POUR  QUE TOUTES LES HAUTEURS APPARAISSENT, PAS SEULEMENT LA DERNIÈRES ???????
-
-            // The value of the last point on the chart
-            num: obj.data[0][5],
-            
-            thousand: ','
-        });
+        // label = RGraph.SVG.numberFormat();
+             // {The value of the last point on the chart
+            // num: obj.data[0][5],
+            // thousand: ' '}
         
         //
         // Remove the text label if its' present
         //
-        if (typeof textLabel !== 'undefined') {
-            textLabel.parentNode.removeChild(textLabel);
-        }
+        // if (typeof textLabel !== 'undefined') {
+        //     textLabel.parentNode.removeChild(textLabel);
+        // }
 
         // Use the RGraph API function to add the label above the last
         // point. Unlike the canvas libraries the SVG text function
@@ -232,7 +245,7 @@ const dessinerLineChartBlackWhite = () => {
             object: obj,
             parent: obj.svg,
             
-            text:   label,
+            // text:   label,
             
             size:   textsize,
             bold:   (textsize > 14),
@@ -247,30 +260,78 @@ const dessinerLineChartBlackWhite = () => {
 
 
 // ACCUMULATIONS PLUIE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const dessinerHorsesShoes = () => {
-    horseshoe = new RGraph.SVG.Horseshoe({
-        id: 'horses_shoes',
-        min: 0,
-        max: 100,
-        value: 63,
+const dessinerGraphiquePluie = () => {
+        // Create a Bar chart with a 2D array as the data. Each group
+    // has three elements even though the chart gives the
+    // impression that there's only two values.
+    new RGraph.Bar({
+        id: 'graphique_pluie',
+        data: [
+            [45, 235, 60],
+            [50, 245, 40],
+            [60, 340, 45],
+            [20, 290, 35],
+            [20, 205, 25],
+            [15, 190, 15],
+            [15, 275, 30],
+            [20, 250, 40],
+            [20, 250, 35],
+            [40, 250, 30],
+            [55, 395, 45],
+            [55, 295, 50]
+        ],
         options: {
-            labelsCenterDecimals: 1,
-            labelsCenterUnitsPost: '%'
+            colors: [mauveFonce, bleuFonce, orangeClair],
+            xaxisLabels: ['J','F','M','A','M','J','J', 'A', 'S', 'O', 'N', 'D'],
+            xaxis: true,
+            yaxis: true,
+            backgroundGridVlines: true,
+            backgroundGridHlinesCount: 8,
+            
+            // The Y axis on this chart has seven values (eight if you
+            // include zero) instead of five and the maximum value is
+            // specifically set to 1,400,000
+            yaxisLabelsCount: 8,
+            yaxisScaleMax: 450,
+            
+            // The key is specified to appear in the margin and is aligned to
+            // the left-hand-side of the main chart area.
+            key: ['Honolulu','Hilo','Mauna Loa '],
+            keyPosition: 'margin',
+            keyPositionX: 100,
+
+            // The title is specified but is aligned to the left-hand-side
+            // of the main chart area.
+            title: 'Comparatif du nombre de pluie à Honolulu, Hilo et Mauna Loa',
+
+            titleX: 100,
+            titleY: 0,
+            titleBold: true,
+            titleHalign: 'left',
+            
+            // Use formatted tooltips to show tooltips
+            //Le tooltips est vraiment mal aligné... je dois cliqué super loin pour l'activé... c'est weird 
+            // tooltips: '<i>Results for <b style="font-size: 14pt">%{property:key[%{index}]}</b> in <b style="font-size: 14pt">%{property:xaxisLabels[%{dataset}]}</b>:</i><br /><span style="font-size: 20pt">$%{value_formatted}</span>',
+            
+            // Add some CSS values which are applied to the tooltip
+            tooltipsCss: {
+                textAlign: 'center',
+            },
+            textAccessible: false //si on le met à true ça rajoute un titre intégré au tableau 
         }
-    }).grow();
-    
-    var d = 2500; setTimeout(f = function ()
+    }).grow().on('beforedraw', function (obj)
     {
-        horseshoe.value = horseshoe.value + RGraph.SVG.random({min: -7, max: 5});
-        horseshoe.grow();
-        
-        setTimeout(f, d);
-    }, d);
+        RGraph.clear(obj.canvas, blanc);
+
+    }).responsive([
+        {maxWidth: null, width: 600, height: 300,options:{textSize: 14, marginInner: 5,marginLeft: 100}, parentCss: {'float':'right'}},
+        {maxWidth: 900, width: 400, height: 200,options:{textSize: 10, marginInner: 2,marginLeft: 50}, parentCss: {'float':'none'}}
+    ]);
 };
 
 
 // TEMPÉRATURE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const dessinerLineChartTemperature = () => { 
+const dessinerGraphiqueTemperature = () => { 
     
     data = [
         [19, 19, 20, 20, 21, 22, 24, 23, 23, 23, 20, 20],
@@ -278,7 +339,7 @@ const dessinerLineChartTemperature = () => {
     ];
 
     new RGraph.SVG.Line({
-        id: 'line_chart',
+        id: 'graphique_temperature',
         data: data,
         options: {
             colors: [bleuPale, rose], 
@@ -304,41 +365,51 @@ const dessinerLineChartTemperature = () => {
             filledAccumulative: true,
             title: 'Hawaï - Température mensuelle moyenne en Celsius',
             titleSubtitle: 'Comparatif entre les températures les plus chaudes et fraîches',
+            tooltipsCss: {
+                fontSize: '14pt',
+                backgroundColor: jaune,
+                color: noir,
+                border: `1px solid ${orangeFonce}`,
+            },
         }
-    }).draw();  
-    
-    // COMMENT LE RENDRE RESPONSIVE ????? PLUS GROS EN VERSION BUREAU
-
+    }).draw().responsive([
+        // VERSION BUREAU
+        {maxWidth: null, width: 700, height: 275, options: {titleSize: 18, textSize: 14, marginInner: 25}, parentCss: {'float': 'none'}},
+        // VERSION MOBILE
+        {maxWidth: 600,  width: 400, height: 200, options: {titleSize: 12, textSize: 10, marginInner: 10}, parentCss: {'float': 'none'}}
+        ]);  
 };
 
+//LA FONCTION FONCTIONNE MAIS UN PETIT BUG A MARIAGE. MOI JE L'UTILISERAIS CAR JE TROUVE CA PLUS COOL
+
+// let dernierIndex = 0;
+// navigationPrincipale[0].classList.add('active'); 
+// sectionElement[0].style.display = 'block';
+
+// for(let index = 0; index < sectionElement.length; index++) { 
+
+// 	navigationPrincipale[index].addEventListener('click', displaySection);
+
+//     function displaySection() {
+//         sectionElement[dernierIndex].style.display = 'none'; 
+//         navigationPrincipale[dernierIndex].classList.remove('active');
+            
+//         sectionElement[index].style.display = 'block';
+//         navigationPrincipale[index].classList.add('active');
+        
+//         dernierIndex = index; 
+//         main();
+//     }
+// }
 
 const main = () => {
-    dessinerHorizontalChart(); 
-    dessinerDonutChart();
-    dessinerDonut3D();
-    // dessinerHorizontalBarChartSVG();
-    dessinerHorsesShoes();
-    dessinerLineChartTemperature(); 
-    dessinerLineChartBlackWhite();
+    dessinerGraphiqueMariage(); 
+    dessinerGraphiqueActivites();
+    dessinerGraphiquePopulation();
+    dessinerGraphiqueVolcans();
+    dessinerGraphiquePluie();
+    dessinerGraphiqueTemperature(); 
 };
 
-let dernierIndex = 0;
-
-for(let index = 0; index < sectionElement.length; index++) { 
-
-	navigationPrincipale[index].addEventListener('click', displaySection);
-
-    function displaySection() {
-        sectionElement[dernierIndex].style.display = 'none'; 
-        navigationPrincipale[dernierIndex].classList.remove = 'active';
-            
-        sectionElement[index].style.display = 'block';
-        navigationPrincipale[index].classList.add = 'active';
-        
-        dernierIndex = index; 
-        main();
-    }
-}
-
-
+main();
 

@@ -25,6 +25,13 @@ body {
     height: 100vh;
 }
 
+button { 
+    background: transparent;
+    border: none; 
+    font-size: 1em;
+    outline: none;
+}
+
 a { 
     text-decoration: none;
     outline: none;
@@ -32,6 +39,10 @@ a {
 
 li {
     list-style-type: none;
+}
+
+p {
+    clear: both;
 }
 
 header {
@@ -56,39 +67,60 @@ h1 {
     margin: 0.5em;
 }
 
-.navigation_principale a{
+.navigation_principale button{
     color: var(--blanc);
     font-weight: 700;
     padding: 0.5em;
 }
 
 
-.navigation_principale a:hover{
+.navigation_principale button:hover{
     color: var(--orange_clair);
     text-decoration: underline;
 }
 
-.navigation_principale a:focus{
+.navigation_principale button:focus{
     color: var(--orange_clair);
     border: 0.2em dashed var(--orange_clair);
     border-radius: 0.2em;
 }
-
+/* Si on décide de ne pas mettre la fonction, la classe active n'est plus necessaire */
 .active { 
-    color: var(--orange_clair);
-    border: red 10px solid;
+    border-bottom: 0.6em solid var(--orange_clair);
 }
+
 main {
-    align-items: center;
     display: flex;
-    flex-direction: column;
+    /* Si on décide de mettre la fonction avec les bouton, le flex direction n'est plus necessaire. */
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
     flex-grow: 1;
+}
+
+main a {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--rouge);
+    padding: 0.2em;
+}
+
+main a:hover {
+    color: var(--mauve_fonce);
+    text-decoration: underline;
+}
+
+main a:focus {
+    border: 0.2em dashed var(--mauve_fonce);
+    border-radius: 0.4em;
+    color: var(--mauve_fonce);
 }
 
 section {
     width: 100%;
     margin: 50px auto;
-    display: none;
+    /* Remettre display none si on decide de prendre la fonction */
+    /* display: none; */ 
 }
 
 footer {
@@ -99,17 +131,17 @@ footer {
     padding: 1em;
 }
 
-#bw_chart {
+#graphique_volcans {
     width: 500px;
     height: 500px;
 }
 
-#horses_shoes {
-    width: 500px;
-    height: 500px;
+#graphique_pluie {
+    width: 700px;
+    height: 350px;
 }
 
-#line_chart { 
+#graphique_temperature { 
     width: 600px;
     height: 300px;
 }
