@@ -16,8 +16,9 @@
     --noir: #050505;
 }
 
+/* Si on marque 100%, le média quewry ne focntionne pas pour 110% */
 html {
-    font-size: 100%;
+    font-size: 18px;
 }
 
 body { 
@@ -196,6 +197,10 @@ footer {
 }
 
 @media (min-width: 800px) {
+
+    html {
+        font-size: 24px;
+    }
     header {
         flex-direction: column;
     }
