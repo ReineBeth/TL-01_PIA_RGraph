@@ -10,23 +10,33 @@
 <body>
     <header>
         <h1>Hawaï <br> Quelques données intéressantes</h1>
+        <nav>
+            <ul class="navigation_principale">
+                <!-- Si on y va sans la fonction faudrait remettre des a-->
+                <li><button aria-label="Navigation principale marigage">Mariage</button></li>
+                <li><button aria-label="Navigation principale activite">Activité</button></li>
+                <li><button aria-label="Navigation principale population">Population</button></li>
+                <li><button aria-label="Navigation principale volcans">Volcans</button></li>
+                <li><button aria-label="Navigation principale pluie">Pluie</button></li>
+                <li><button aria-label="Navigation principale temperature">Température</button></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <!-- Canvas -->
-
-        <!-- A non-filled Radar chart -->
+        <!-- Cabuttonart -->
         <section>
             <h2>Mariages selon les îles</h2>
 
-            <canvas id="horizontal_chart" width="600" height="450">
+            <canvas id="graphique_mariage" width="600" height="450">
                 [No canvas support]
             </canvas>
+            <p><a href="https://health.hawaii.gov/vitalstatistics/preliminary-marriage-total-same-sex/" target="_blank" title="Lien vers le site gouvernement d'Hawaii">Source pour les mariages</a></p>
         </section>
 
         <section>
             <h2>Activités</h2>
             <h3>(Les activités populaires selon les offres des compagnies touristiques)</h3>
-            <canvas id="donut_chart" width="450" height="450">
+            <canvas id="graphique_activites" width="450" height="450">
                 [No canvas support]
             </canvas>
             <p><a href="https://www.gohawaii.com/fr/experiences?f%5B0%5D=field_categories%3A551&f%5B1%5D=field_categories%3A596&f%5B2%5D=field_categories%3A546&f%5B3%5D=field_categories%3A46&modified=1#listings" target="_blank" title="Lien vers le site The Hawaiian Islands ">Source pour les activités</a></p>
@@ -35,32 +45,31 @@
 
         <section>
             <h2>Population</h2>
-            <canvas id="donut_3d_chart" width="600" height="350">
+            <canvas id="graphique_population" width="600" height="350">
                 [No canvas support]
             </canvas>
+            <p><a href="https://fr.wikipedia.org/wiki/Hawa%C3%AF" target="_blank" title="Lien vers le wikipédia francophone d'Hawaii">Source pour la population</a></p>
         </section>
-
-        <!-- SVG -->
-        <!-- <section>
-            <div id="bipolar_chart"></div>
-        </section> -->
         
-        
-        <!-- Line Chart Black and white -->
         <section>
-            <h2>Hauteurs des volcans en mètres</h2>
-            <div id="bw_chart"></div>
+            <h2>Hauteurs des volcans</h2>
+            <div id="graphique_volcans"></div>
             <p><a href="https://www.to-hawaii.com/fr/volcans.php" target="_blank" title="Lien vers le site To-Hawaii.com">Source pour les volcans</a></p>
         </section>
        
         <section>
             <h2>Pluie accumulation par mois</h2>
-            <div id="horses_shoes"></div>
+        
+            <canvas id="graphique_pluie">[No canvas support]</canvas>
+
+            <p><a href="https://www.climatsetvoyages.com/climat/hawaii" target="_blank" title="Lien vers le site Climats et voyages">Source pour la quantité de pluie</a></p>
         </section>
 
         <section>
             <h2>Température</h2>
-            <div id="line_chart"></div>
+            <div class="wrapper">
+                <div id="graphique_temperature"></div>
+            </div>
             <p><a href="https://fr.wikipedia.org/wiki/Hawa%C3%AF#Climat" target="_blank" title="Lien vers la page Wikipédia - Climat">Source pour la température</a></p>
         </section>
     </main>
@@ -75,10 +84,14 @@
     <script src="/src/assets/scripts/RGraph.radar.js"></script>
     <script src="/src/assets/scripts/RGraph.activity.js"></script>
     <script src="/src/assets/scripts/RGraph.hbar.js"></script>
+    <!-- Ajout de ce lien pour tooltips -->
+    <script src="/src/assets/scripts/RGraph.line.js"></script>
 
     <script src="/src/assets/scripts/RGraph.common.dynamic.js"></script>
     <script src="/src/assets/scripts/RGraph.common.tooltips.js"></script>
     <script src="/src/assets/scripts/RGraph.pie.js"></script>
+    <script src="/src/assets/scripts/RGraph.common.key.js"></script>
+    <script src="/src/assets/scripts/RGraph.bar.js"></script>
    
     <!-- SVG Horizontal Bar chart API reference -->
 
@@ -93,16 +106,6 @@
     <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.bipolar.js"></script> -->
     <script src="/src/assets/scripts/RGraph.svg.horseshoe.js"></script>
     <script src="/src/assets/scripts/RGraph.svg.line.js"></script>
-    
-    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.activity.js"></script> -->
-    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.ajax.js"></script> -->
-    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.csv.js"></script> -->
-    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.fx.js"></script> -->
-    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.key.js"></script> -->
-    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.common.sheets.js"></script> -->
-    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.funnel.js"></script> -->
-    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.gauge.js"></script> -->
-    <!-- <script src="/AGU_TL-01_desjardins_elisabeth/RGraph/libraries/RGraph.svg.pie.js"></script> -->
 
 
     <script src="/src/assets/scripts/index.js"></script>

@@ -17,6 +17,7 @@
 }
 
 body { 
+    background: var(--blanc);
     font-family: 'Roboto', sans-serif;
     text-align: center;
     display: flex;
@@ -24,51 +25,124 @@ body {
     height: 100vh;
 }
 
-main {
-    flex-grow: 1;
-    /* display: flex; */
-    /* flex-wrap: wrap; */
+button { 
+    background: transparent;
+    border: none; 
+    font-size: 1em;
+    outline: none;
 }
 
-footer {
+a { 
+    text-decoration: none;
+    outline: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+p {
+    clear: both;
+}
+
+header {
+    background: var(--bleu_fonce);
+    color: var(--blanc);
+}
+
+h1 { 
+    font-size: 3em;
+    padding: 0.8em;
+}
+
+.navigation_principale { 
     display: flex;
     justify-content: space-around;
-}
-/* #bipolar_chart {
-    width: 800px;
-    height: 300px;
-    border: 1px solid red;
-} */
-
-#bw_chart {
-    width: 500px;
-    height: 500px;
-    /* border: 1px solid blue; */
+    flex-wrap: wrap;
+    font-size: 1.4em;
+    padding: 2em;
 }
 
-#horses_shoes {
-    width: 500px;
-    height: 500px;
-    /* border: 1px solid blue; */
+.navigation_principale li {
+    margin: 0.5em;
 }
 
-#line_chart { 
-    width: 600px;
-    height: 300px;
-   
-    /* border: 1px solid purple; */
+.navigation_principale button{
+    color: var(--blanc);
+    font-weight: 700;
+    padding: 0.5em;
 }
 
 
+.navigation_principale button:hover{
+    color: var(--orange_clair);
+    text-decoration: underline;
+}
+
+.navigation_principale button:focus{
+    color: var(--orange_clair);
+    border: 0.2em dashed var(--orange_clair);
+    border-radius: 0.2em;
+}
+/* Si on décide de ne pas mettre la fonction, la classe active n'est plus necessaire */
+.active { 
+    border-bottom: 0.6em solid var(--orange_clair);
+}
 
 main {
     display: flex;
-    flex-direction: column;
+    /* Si on décide de mettre la fonction avec les bouton, le flex direction n'est plus necessaire. */
+    flex-direction: column; 
     align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+main a {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--rouge);
+    padding: 0.2em;
+}
+
+main a:hover {
+    color: var(--mauve_fonce);
+    text-decoration: underline;
+}
+
+main a:focus {
+    border: 0.2em dashed var(--mauve_fonce);
+    border-radius: 0.4em;
+    color: var(--mauve_fonce);
 }
 
 section {
     width: 100%;
     margin: 50px auto;
+    /* Remettre display none si on decide de prendre la fonction */
+    /* display: none; */ 
+}
+
+footer {
+    background: var(--bleu_fonce);
+    color: var(--blanc);
+    display: flex;
+    justify-content: space-around;
+    padding: 1em;
+}
+
+#graphique_volcans {
+    width: 500px;
+    height: 500px;
+}
+
+#graphique_pluie {
+    width: 700px;
+    height: 350px;
+}
+
+#graphique_temperature { 
+    width: 600px;
+    height: 300px;
 }
 
