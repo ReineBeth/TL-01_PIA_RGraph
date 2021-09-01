@@ -28,22 +28,40 @@ const dessinerGraphiqueMariage = () => {
     new RGraph.HBar({
         id: 'graphique_mariage',
         data: [67, 16, 14, 3],
+    
         options: {
+            // Si on met un background, on voit la Maui, mais il est par dessus le 3%
+            // backgroundColor: jaune,
             backgroundGrid: false,
             xaxis: false,
             yaxis: false,
             xaxisScale: false,
             labelsAbove: true,
             labelsAboveUnitsPost: '%',
+            
+            // J'essaie de le mettre jaune pour au moins qu'on lise Maui... Mais c'est un détail car il y a les tootlTips
+            
+            // labelsInBar: [jaune],
+            // labelsInBarBackground:[jaune],	
+            
+            // Faudrait changer la biblio, je crois, car la color est white... mais j'ai peur de tout fucker
+            
             colors: [mauveFonce],
             shadow: true,
             shadowColor: '#ddd',
             shadowOffsetx: 2,
             shadowOffsety: 2,
             
+            
+           
+            
             // tooltips: `<i style="position: relative; top: -5px">Pourcentage de mariage dans l'état d'Hawaii :</i> <span style="font-size: 26pt; ">%{value}%</span>`,
 
             //C'est pas dynamique mais je préfère quand le tooltips varie d'une ligne à l'autre. :) (surtout pour qu'on puisse voir que la dernière ligne est maui)
+
+            // Ou sinon, on change le 3% pour 6%... Maude n'ira jamais vérifier les données axactes...
+            //   :)
+
             tooltips: ['Honolulu : 67%', 'Hawaii : 16%', 'Kauai : 14%', 'Maui: 3%'],
             tooltipsCss: {
                 fontSize: '14pt',
@@ -80,7 +98,7 @@ const dessinerGraphiqueMariage = () => {
         // VERSION BUREAU
         {maxWidth: null,width:600,height: 350,parentCss:{'float':'right'}},
         // VERSION MOBILE
-       {maxWidth: 800,width:400,height: 300,parentCss:{'float':'none'}}
+       {maxWidth: 600,width:400,height: 300,parentCss:{'float':'none'}}
     ]);
 };
 
@@ -128,12 +146,12 @@ const dessinerGraphiqueActivites = () => {
             marginRight: 5
         }
     }).grow().responsive([
-
-        // VERSION MOBILE
-        {maxWidth: null, width: 450, height: 450, options: {width: null}, css: {'float':'none'}},
-
+        
         // VERSION BUREAU
-        {maxWidth: 650,  width: 250, height: 250, options: {width: 25}, css: {'float':'none'}}
+        {maxWidth: null, width: 450, height: 450, options: {width: null}, css: {'float':'none'}},
+        
+        // VERSION MOBILE
+        {maxWidth: 600,  width: 250, height: 250, options: {width: 25}, css: {'float':'none'}}
     ]);
 };
 
@@ -143,7 +161,8 @@ const dessinerGraphiqueActivites = () => {
 
 const dessinerGraphiquePopulation = () => {
     // J'ai pris les termes utilisé sur wikipédia. Je ne sais pas si utilisé les termes blancs et noirs c'est la bonne chose ou si ya un meilleur terme. 
-    let labels = ['Asiatiques','Blancs','Océaniens','Noirs','Autres'];
+    // Je dirais que oui, et on donne la source, c'est bon pour moi
+    let labels = ['Asiatiques 38%','Blancs 25%','Océaniens 10%','Noirs 2%','Autres 25%'];
 
     // Create the Pie chart, set the donut variant and the rest of the
     // configuration. The variant property is what sets the chart to
@@ -160,22 +179,54 @@ const dessinerGraphiquePopulation = () => {
             labels: labels,
             labelsSticksLength: 15,
             labelsSticksLinewidth: 2,
-            textAccessible: false, //devrait-on mettre le text accessible ? 
+
+            //devrait-on mettre le text accessible ? 
+            // Sais pas trop, ça change la typo... Et quand je check dans Axe DevTool, on n'a pas de Critical issues ou Serious... On a 1 Moderate et 1 Minor, et c'est du code des graphiques. Donc je le garderais à false
+            textAccessible: false, 
+
+            // Car même si on ajoute ces 3 propriétés, ça ne change rien.La doc dit aussi que ce n'est pas certain de rendre un texte accessible (voir : https://www.rgraph.net/canvas/accessible-text.html)
+            // textAccessible: true,         
+            // The default is true now
+            // textAccessibleOverflow: true, 
+            // The default is true now
+            // textAccessiblePointerevents: true,
+
             textSize: 14,
+
+// Peu importe ce qu'on écrit, ça écrit les labels???????????
+// tooltips: ['38%', '25%', '10%', '2%', '25%'],
+// DONC j'ai modifié le let labels en haut :) et j'ai ajouté ceci:
+
+            tooltips: [],
+
+            tooltipsCss: {
+                fontSize: '14pt',
+                backgroundColor: blanc,
+                color: noir,
+                border: `1px solid ${bleuFonce}`,
+            },
+
+
             colorsStroke: 'transparent',
             colors: [orangeClair, vertFonce, bleuFonce, mauveFonce, bleuPale],
-            exploded: [8, 8, 8, 8, 8], //J'ai découvert exploded, je ne sais pas si j'aime mais je me dis qu'il y a quelque chose de cool avec ca. 
-            
+            exploded: [8, 8, 8, 8, 8], 
+            //J'ai découvert exploded, je ne sais pas si j'aime mais je me dis qu'il y a quelque chose de cool avec ca. 
+            // J'aime aussi!!!
         }
     }).draw().responsive([
         
         // Comment le rendre plus grand en version bureau?
         
         // VERSION BUREAU
-        {maxWidth: null,width:600,height:350,options:{radius: 100,labelsList: false, labels:labels,title:'',tooltips:null}},
+        {maxWidth: null,width:800,height:400,options:{radius: 100,labelsList: false, labels:labels,title:'',tooltips:null}},
         
         // VERSION MOBILE - Les Labels disparaissent !
-        {maxWidth: 900,width:400,height:250,options:{radius: 100,labels: null,title: 'Population Hawaii',tooltips:labels}}
+        {maxWidth: 600,width:400,height:350,options:{radius: 100,labels: null,
+            // title: 'Population Hawaii',
+            // J'enlèverais le title car on en a déjà un
+            tooltips:labels}}
+
+            // Voici pourquoi!!!!  Faudrait changer tolltops par autres chose, mais sinon, ma façcon me va
     ]);
 };
 
@@ -210,14 +261,22 @@ const dessinerGraphiqueVolcans = () => {
                 color: noir,
                 border: `1px solid ${orangeFonce}`,
             },
+
+            // J'essaie de placer les lables de l'axe des x, verticallement pour pouvoir le voir au complet en mobile
+            xaxisLabelsAngle: 90,
+
+// Ça fonctionne, mais j'en pers des bouts...
+            // xaxisPosition: top,
+            // xaxisLabelsPosition: right,
+            // xaxisLabelsSpecificAlign: right,
         }
     }).responsive([
 
         // VERSION BUREAU
-        {maxWidth:null,width:900,height:500,options:{linewidth:5,tickmarksSize: 8,textSize: 16,marginInner: 50,'data-textsize': 20, marginLeft: 100},css:{'float':'none'}},
+        {maxWidth:null,width:850,height:450,options:{linewidth:5,tickmarksSize: 8,textSize: 16,marginInner: 50,'data-textsize': 20, marginLeft: 100},css:{'float':'none'}},
         
         // VERSION MOBILE
-        {maxWidth:900,width:600,height:350,options:{linewidth:3,tickmarksSize: 4,textSize: 12,marginInner: 30,'data-textsize': 14},css:{'float':'none'}}
+        {maxWidth:600,width:500,height:300,options:{linewidth:3,tickmarksSize: 4,textSize: 12,marginInner: 30,'data-textsize': 14},css:{'float':'none'}}
 
     ]).on('draw', function (obj) {
         var textsize = obj.get('data-textsize');
@@ -324,8 +383,11 @@ const dessinerGraphiquePluie = () => {
         RGraph.clear(obj.canvas, blanc);
 
     }).responsive([
-        {maxWidth: null, width: 600, height: 300,options:{textSize: 14, marginInner: 5,marginLeft: 100}, parentCss: {'float':'right'}},
-        {maxWidth: 900, width: 400, height: 200,options:{textSize: 10, marginInner: 2,marginLeft: 50}, parentCss: {'float':'none'}}
+        {maxWidth: null, width: 750, height: 350,options:{textSize: 14, marginInner: 5,marginLeft: 50}, parentCss: {'float':'right'}},
+
+
+        // À 500px on ne le voit pas au complet
+        {maxWidth: 600, width: 500, height: 200,options:{textSize: 10, marginInner: 2,marginLeft: 50}, parentCss: {'float':'none'}}
     ]);
 };
 
@@ -350,11 +412,19 @@ const dessinerGraphiqueTemperature = () => {
             xaxisLabels: ['JAN','FEV','MAR','AVR','MAI','JUI','JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC'],
             months: ['janvier','février','mars','avril','mai','juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
             tooltips: '<b>%{property:months[%{index}]}: %{value}°C</b>',
+            // POURQUOI 2x la propriété tooltipsCss ?
+            // tooltipsCss: {
+            //     backgroundColor: '#333',
+            //     fontWeight: 'bold',
+            //     fontSize: '14pt',
+            //     opacity: 0.5,
+            // },
+            // POURQUOI 2x la propriété tooltipsCss ?
             tooltipsCss: {
-                backgroundColor: '#333',
-                fontWeight: 'bold',
                 fontSize: '14pt',
-                opacity: 0.5,
+                backgroundColor: jaune,
+                color: noir,
+                border: `1px solid ${orangeFonce}`,
             },
             linewidth: 3,
             marginTop: 45,
@@ -365,22 +435,20 @@ const dessinerGraphiqueTemperature = () => {
             filledAccumulative: true,
             title: 'Hawaï - Température mensuelle moyenne en Celsius',
             titleSubtitle: 'Comparatif entre les températures les plus chaudes et fraîches',
-            tooltipsCss: {
-                fontSize: '14pt',
-                backgroundColor: jaune,
-                color: noir,
-                border: `1px solid ${orangeFonce}`,
-            },
         }
     }).draw().responsive([
         // VERSION BUREAU
-        {maxWidth: null, width: 700, height: 275, options: {titleSize: 18, textSize: 14, marginInner: 25}, parentCss: {'float': 'none'}},
+        {maxWidth: null, width: 750, height: 350, options: {titleSize: 16, textSize: 14, marginInner: 25}, parentCss: {'float': 'none'}},
         // VERSION MOBILE
-        {maxWidth: 600,  width: 400, height: 200, options: {titleSize: 12, textSize: 10, marginInner: 10}, parentCss: {'float': 'none'}}
+        {maxWidth: 600,  width: 500, height: 200, options: {titleSize: 12, textSize: 10, marginInner: 10}, parentCss: {'float': 'none'}}
         ]);  
 };
 
 //LA FONCTION FONCTIONNE MAIS UN PETIT BUG A MARIAGE. MOI JE L'UTILISERAIS CAR JE TROUVE CA PLUS COOL
+// ACTIVITÉS et MARIAGES ne fonctionnent pas très bien (en mobile comme en bureau)
+// POPULATIONS les tooltips, en mobile, n'apparaissent plus
+// Je ferais des ances.... 
+
 
 // let dernierIndex = 0;
 // navigationPrincipale[0].classList.add('active'); 
