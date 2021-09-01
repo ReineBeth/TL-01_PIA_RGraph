@@ -25,7 +25,7 @@ body {
     background: var(--blanc);
     font-family: 'Roboto', sans-serif;
     /* Ce n'est pas l'idéal... je ne comprends pas pourquoi la ligne 86 et 87 ne fonctionne pas */
-    text-align: center;
+    /* text-align: center; */
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -75,6 +75,7 @@ header nav {
 h1, h2 { 
     padding: 5px;
     color: var(--jaune);
+    text-align: center;
 }
 
 h1 {
@@ -85,12 +86,13 @@ h2 {
     font-size: 1.8rem;
 }
 
-h3, h4 {
+/* h3, h4 {
     color: var(--rose);
-}
+} */
 
 h3 {
     font-size: 1.5rem;
+    text-align: center;
 }
 
 /* h1, h2, h3 {
@@ -140,9 +142,9 @@ main {
     display: flex;
     /* Si on décide de mettre la fonction avec les bouton, le flex direction n'est plus necessaire. */
     flex-direction: column; 
-
+    /* justify-content: center; */
     /* Pourquoi cecii ne fontionne pas? */
-    /* align-content: center; */
+    align-items: center;
     /* justify-items: center; */
     flex-grow: 1;
 }
@@ -166,8 +168,8 @@ main a:focus {
 }
 
 section {
-    width: 100%;
-    margin: 50px auto;
+    width: 80%;
+    margin: 0 auto;
     /* Remettre display none si on decide de prendre la fonction */
     /* display: none; */ 
 }
@@ -181,8 +183,8 @@ footer {
 }
 
 #graphique_volcans {
-    width: 500px;
-    height: 500px;
+    /* width: 500px; */
+    /* height: 500px; */
 }
 
 /* Ça empêche d'être responsive */
@@ -192,8 +194,8 @@ footer {
 }
 
 #graphique_temperature { 
-    width: 600px;
-    height: 300px;
+    /* width: 600px; */
+    /* height: 300px; */
 }
 
 @media (min-width: 800px) {
