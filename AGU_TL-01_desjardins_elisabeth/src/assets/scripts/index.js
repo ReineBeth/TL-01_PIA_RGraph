@@ -18,50 +18,22 @@ const navigationPrincipale = document.querySelectorAll('.navigation_principale b
 const sectionElement = document.querySelectorAll('section');
 
 const dessinerGraphiqueMariage = () => {
-    // The labels for the chart are not added by giving them to the
-    // chart but manually adding text to the chart.
     let labels = ['Honolulu', 'Hawaii', 'Kauai', 'Maui' ];
-
-    // Create the Horizontal Bar chart and configure it. With there
-    // being no labels on the left-hand-side the margin autofit
-    // will make the left margin zero
     new RGraph.HBar({
         id: 'graphique_mariage',
         data: [67, 16, 14, 3],
-    
         options: {
-            // Si on met un background, on voit la Maui, mais il est par dessus le 3%
-            // backgroundColor: jaune,
             backgroundGrid: false,
             xaxis: false,
             yaxis: false,
             xaxisScale: false,
             labelsAbove: true,
-            labelsAboveUnitsPost: '%',
-            
-            // J'essaie de le mettre jaune pour au moins qu'on lise Maui... Mais c'est un détail car il y a les tootlTips
-            
-            // labelsInBar: [jaune],
-            // labelsInBarBackground:[jaune],	
-            
-            // Faudrait changer la biblio, je crois, car la color est white... mais j'ai peur de tout fucker
-            
+            labelsAboveUnitsPost: '%', 
             colors: [mauveFonce],
             shadow: true,
             shadowColor: '#ddd',
             shadowOffsetx: 2,
             shadowOffsety: 2,
-            
-            
-           
-            
-            // tooltips: `<i style="position: relative; top: -5px">Pourcentage de mariage dans l'état d'Hawaii :</i> <span style="font-size: 26pt; ">%{value}%</span>`,
-
-            //C'est pas dynamique mais je préfère quand le tooltips varie d'une ligne à l'autre. :) (surtout pour qu'on puisse voir que la dernière ligne est maui)
-
-            // Ou sinon, on change le 3% pour 6%... Maude n'ira jamais vérifier les données axactes...
-            //   :)
-
             tooltips: ['Honolulu : 67%', 'Hawaii : 16%', 'Kauai : 14%', 'Maui: 3%'],
             tooltipsCss: {
                 fontSize: '14pt',
@@ -73,16 +45,12 @@ const dessinerGraphiqueMariage = () => {
             highlightStroke: 'Gradient(rgba(255,255,255,0):white)'
         }
     
-    // Use the draw event to add the labels on the left-hand-side
     }).on('draw', function (obj)
     {
         var coords = obj.coords;
 
-        // Loop through the coordinates of the bars
         for (var i=0; i<coords.length; ++i) {
-        
-            // For each of the coordinates add a text label
-            // on the left-hand-side of the bar
+    
             RGraph.text({
                 object: obj,
                 text:   labels[i],
@@ -102,12 +70,9 @@ const dessinerGraphiqueMariage = () => {
     ]);
 };
 
-
-
 // ACTIVITÉS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerGraphiqueActivites = () => {
 
-    // Pourquoi lorsque j'ajoute une 5e activités, tout devient translucide ????
     let labels = ['Sports d\'eau 47%', 'Visites guidées 15%', 'Culture, histoire et art 14%', 'Dîner-spectacle danse Luau 13%'];
     let data = ['47%','15%','14%','13%'];
 
@@ -119,14 +84,6 @@ const dessinerGraphiqueActivites = () => {
         options: {
             colors : [bleuFonce, vertFonce, mauvePale, rose],
             backgroundColor: '#ffffff',
-
-            // ON N'A PAS LES ICONES, ON SE TROUVE DES IMAGES ????????????????????????????
-            // icons: [
-            //     '../images/activityMeter-arrowright.png',
-            //     '../images/activityMeter-arrowup.png',
-            //     '../images/activityMeter-arrowdown.png'
-            // ],
-            
             labels: labels,
             labelsBold:true,
             labelsColor: noir,
@@ -160,13 +117,8 @@ const dessinerGraphiqueActivites = () => {
 // POPULATIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 const dessinerGraphiquePopulation = () => {
-    // J'ai pris les termes utilisé sur wikipédia. Je ne sais pas si utilisé les termes blancs et noirs c'est la bonne chose ou si ya un meilleur terme. 
-    // Je dirais que oui, et on donne la source, c'est bon pour moi
     let labels = ['Asiatiques 38%','Blancs 25%','Océaniens 10%','Noirs 2%','Autres 25%'];
-
-    // Create the Pie chart, set the donut variant and the rest of the
-    // configuration. The variant property is what sets the chart to
-    // be a Donut chart instead of a regular Pie chart.
+    
     new RGraph.Pie({
         id: 'graphique_population',
         data: [38.60, 24.74, 9.96, 1.57, 25.13],
@@ -192,41 +144,25 @@ const dessinerGraphiquePopulation = () => {
             // textAccessiblePointerevents: true,
 
             textSize: 14,
-
-// Peu importe ce qu'on écrit, ça écrit les labels???????????
-// tooltips: ['38%', '25%', '10%', '2%', '25%'],
-// DONC j'ai modifié le let labels en haut :) et j'ai ajouté ceci:
-
             tooltips: [],
-
             tooltipsCss: {
                 fontSize: '14pt',
                 backgroundColor: blanc,
                 color: noir,
                 border: `1px solid ${bleuFonce}`,
             },
-
-
             colorsStroke: 'transparent',
             colors: [orangeClair, vertFonce, bleuFonce, mauveFonce, bleuPale],
             exploded: [8, 8, 8, 8, 8], 
-            //J'ai découvert exploded, je ne sais pas si j'aime mais je me dis qu'il y a quelque chose de cool avec ca. 
-            // J'aime aussi!!!
         }
     }).draw().responsive([
-        
-        // Comment le rendre plus grand en version bureau?
         
         // VERSION BUREAU
         {maxWidth: null,width:800,height:400,options:{radius: 100,labelsList: false, labels:labels,title:'',tooltips:null}},
         
         // VERSION MOBILE - Les Labels disparaissent !
-        {maxWidth: 600,width:400,height:350,options:{radius: 100,labels: null,
-            // title: 'Population Hawaii',
-            // J'enlèverais le title car on en a déjà un
-            tooltips:labels}}
+        {maxWidth: 600,width:400,height:350,options:{radius: 100,labels: null,tooltips:labels}}
 
-            // Voici pourquoi!!!!  Faudrait changer tolltops par autres chose, mais sinon, ma façcon me va
     ]);
 };
 
@@ -234,11 +170,8 @@ const dessinerGraphiquePopulation = () => {
 // LES HAUTEURS DES VOLCANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerGraphiqueVolcans = () => {
     
-    // This is the data for the Line chart. A simple JavaScript array.
     let data = [1000,1246,1600,3000,4169,4200];
 
-    // Create the Line chart. Give it the data that's defined above.
-    // There's nothing notable about the configuration.
     line = new RGraph.SVG.Line({
         id: 'graphique_volcans',
         data: data,
@@ -263,7 +196,7 @@ const dessinerGraphiqueVolcans = () => {
             },
 
             // J'essaie de placer les lables de l'axe des x, verticallement pour pouvoir le voir au complet en mobile
-            xaxisLabelsAngle: 90,
+            // xaxisLabelsAngle: 90,
 
 // Ça fonctionne, mais j'en pers des bouts...
             // xaxisPosition: top,
@@ -281,34 +214,11 @@ const dessinerGraphiqueVolcans = () => {
     ]).on('draw', function (obj) {
         var textsize = obj.get('data-textsize');
 
-        // Format the text that is about to be added to the Line chart
-        // above the last datapoint.
-        // label = RGraph.SVG.numberFormat();
-             // {The value of the last point on the chart
-            // num: obj.data[0][5],
-            // thousand: ' '}
-        
-        //
-        // Remove the text label if its' present
-        //
-        // if (typeof textLabel !== 'undefined') {
-        //     textLabel.parentNode.removeChild(textLabel);
-        // }
-
-        // Use the RGraph API function to add the label above the last
-        // point. Unlike the canvas libraries the SVG text function
-        // doesn't have to be inside the draw event because SVG doesn't
-        // clear itself like canvas does when things need redrawing.
-
         textLabel = RGraph.SVG.text({
             object: obj,
             parent: obj.svg,
-            
-            // text:   label,
-            
             size:   textsize,
             bold:   (textsize > 14),
-
             x:      obj.coords[5].x,
             y:      obj.coords[5].y - 25,
             valign: 'bottom',
@@ -320,9 +230,7 @@ const dessinerGraphiqueVolcans = () => {
 
 // ACCUMULATIONS PLUIE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerGraphiquePluie = () => {
-        // Create a Bar chart with a 2D array as the data. Each group
-    // has three elements even though the chart gives the
-    // impression that there's only two values.
+
     new RGraph.Bar({
         id: 'graphique_pluie',
         data: [
@@ -347,20 +255,16 @@ const dessinerGraphiquePluie = () => {
             backgroundGridVlines: true,
             backgroundGridHlinesCount: 8,
             
-            // The Y axis on this chart has seven values (eight if you
-            // include zero) instead of five and the maximum value is
-            // specifically set to 1,400,000
+         
             yaxisLabelsCount: 8,
             yaxisScaleMax: 450,
             
-            // The key is specified to appear in the margin and is aligned to
-            // the left-hand-side of the main chart area.
+          
             key: ['Honolulu','Hilo','Mauna Loa '],
             keyPosition: 'margin',
             keyPositionX: 100,
 
-            // The title is specified but is aligned to the left-hand-side
-            // of the main chart area.
+         
             title: 'Comparatif du nombre de pluie à Honolulu, Hilo et Mauna Loa',
 
             titleX: 100,
@@ -368,15 +272,12 @@ const dessinerGraphiquePluie = () => {
             titleBold: true,
             titleHalign: 'left',
             
-            // Use formatted tooltips to show tooltips
-            //Le tooltips est vraiment mal aligné... je dois cliqué super loin pour l'activé... c'est weird 
-            // tooltips: '<i>Results for <b style="font-size: 14pt">%{property:key[%{index}]}</b> in <b style="font-size: 14pt">%{property:xaxisLabels[%{dataset}]}</b>:</i><br /><span style="font-size: 20pt">$%{value_formatted}</span>',
-            
-            // Add some CSS values which are applied to the tooltip
-            tooltipsCss: {
-                textAlign: 'center',
-            },
-            textAccessible: false //si on le met à true ça rajoute un titre intégré au tableau 
+            // tooltips: [],
+            // tooltipsCss: {
+            //     textAlign: 'center',
+            // },
+            textAccessible: false 
+            //si on le met à true ça rajoute un titre intégré au tableau 
         }
     }).grow().on('beforedraw', function (obj)
     {
@@ -412,14 +313,6 @@ const dessinerGraphiqueTemperature = () => {
             xaxisLabels: ['JAN','FEV','MAR','AVR','MAI','JUI','JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC'],
             months: ['janvier','février','mars','avril','mai','juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
             tooltips: '<b>%{property:months[%{index}]}: %{value}°C</b>',
-            // POURQUOI 2x la propriété tooltipsCss ?
-            // tooltipsCss: {
-            //     backgroundColor: '#333',
-            //     fontWeight: 'bold',
-            //     fontSize: '14pt',
-            //     opacity: 0.5,
-            // },
-            // POURQUOI 2x la propriété tooltipsCss ?
             tooltipsCss: {
                 fontSize: '14pt',
                 backgroundColor: jaune,
