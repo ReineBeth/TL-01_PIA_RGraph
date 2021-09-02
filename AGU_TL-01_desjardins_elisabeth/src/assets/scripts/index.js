@@ -7,17 +7,49 @@ const bleuFonce = getComputedStyle(document.documentElement).getPropertyValue('-
 const mauvePale = getComputedStyle(document.documentElement).getPropertyValue('--mauve_pale');
 const mauveFonce = getComputedStyle(document.documentElement).getPropertyValue('--mauve_fonce');
 const rose = getComputedStyle(document.documentElement).getPropertyValue('--rose');
-const rouge = getComputedStyle(document.documentElement).getPropertyValue('--rouge');
+
 const orangeClair = getComputedStyle(document.documentElement).getPropertyValue('--orange_clair');
 const orangeFonce = getComputedStyle(document.documentElement).getPropertyValue('--orange_fonce');
 const blanc = getComputedStyle(document.documentElement).getPropertyValue('--blanc');
 const noir = getComputedStyle(document.documentElement).getPropertyValue('--noir');
 
 //LES ÉLÉMENTS 
-const navigationPrincipale = document.querySelectorAll('.navigation_principale button'); 
-const sectionElement = document.querySelectorAll('section');
+const navigationPrincipale = document.querySelector('nav');
+const menuOuvrirBtn = document.querySelector('.menu_open_btn'); 
+const menuFermerBtn = document.querySelector('.menu_close_btn'); 
+
+// Fonctionnalités générales 
+
+function ouvrirNavigation() { 
+    navigationPrincipale.style.display = 'block';
+    menuFermerBtn.style.display = 'block';
+
+    menuOuvrirBtn.style.display = 'none';
+}
+
+function fermerNavigation() { 
+    navigationPrincipale.style.display = 'none';
+    menuFermerBtn.style.display = 'none';
+
+    menuOuvrirBtn.style.display = 'block';
+}
+
+function changerNavigationResize() { 
+
+    fermerNavigation();
+
+	if(window.innerWidth >= '800') {  
+		ouvrirNavigation(); 
+		menuFermerBtn.style.display = 'none'; 
+	}
+}
+
+// Les graphiques 
 
 const dessinerGraphiqueMariage = () => {
+
+    // Ouain... Maui fait chier XD 
+
     let labels = ['Honolulu', 'Hawaii', 'Kauai', 'Maui' ];
     new RGraph.HBar({
         id: 'graphique_mariage',
@@ -34,7 +66,7 @@ const dessinerGraphiqueMariage = () => {
             shadowColor: '#ddd',
             shadowOffsetx: 2,
             shadowOffsety: 2,
-            tooltips: ['Honolulu : 67%', 'Hawaii : 16%', 'Kauai : 14%', 'Maui: 3%'],
+            tooltips: [`${labels[0]} : 67%`, `${labels[1]} : 16%`, `${labels[2]} : 14%`, `${labels[3]}: 3%`],
             tooltipsCss: {
                 fontSize: '14pt',
                 backgroundColor: bleuPale,
@@ -62,18 +94,26 @@ const dessinerGraphiqueMariage = () => {
             });
         }
     }).grow().responsive([
+
+// Version 2
+//Pas parfait à cause de la 4ième valeur qui est si petite 
+{maxWidth: null, width: 600, height: 300, options: {textSize: 14}},
+{maxWidth: 900,  width: 400, height: 200, options: {textSize: 10}}
+
         
-        // VERSION BUREAU
-        {maxWidth: null,width:600,height: 350,parentCss:{'float':'right'}},
-        // VERSION MOBILE
-       {maxWidth: 600,width:400,height: 300,parentCss:{'float':'none'}}
+// Version 1
+//À 500 de largeur je ne vois pas tous le graphique. 
+        // // VERSION BUREAU
+        // {maxWidth: null,width:600,height: 350},
+        // // VERSION MOBILE
+        // {maxWidth: 600,width:400,height: 300}
     ]);
 };
 
 // ACTIVITÉS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerGraphiqueActivites = () => {
 
-    let labels = ['Sports d\'eau 47%', 'Visites guidées 15%', 'Culture, histoire et art 14%', 'Dîner-spectacle danse Luau 13%'];
+    let labels = ['Sports d\'eau', 'Visites guidées', 'Culture, histoire et art', 'Dîner-spectacle danse Luau'];
     let data = ['47%','15%','14%','13%'];
 
     activity = new RGraph.Activity({
@@ -83,18 +123,32 @@ const dessinerGraphiqueActivites = () => {
         value: data,
         options: {
             colors : [bleuFonce, vertFonce, mauvePale, rose],
-            backgroundColor: '#ffffff',
+            backgroundColor: 'transparent',
             labels: labels,
             labelsBold:true,
             labelsColor: noir,
 
-            // BEAUCOUP DE DIFFICULTÉS à mettre ça beau et clean!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // tooltips: 'Résultats:%{key}',
-            // tooltipsFormattedKeyLabels: labels,
-            // tooltipsCss: {
-            //     fontSize: '16pt',
-            //     textAlign: 'left'
-            // },
+
+
+            // OPTION 1
+            // tooltips: [`${labels[0]} ${data[0]}%`, `${labels[1]} ${data[1]}%`, `${labels[2]} ${data[2]}%`, `${labels[3]} ${data[3]}%`],
+
+
+
+            // OPTION 2
+            tooltips: [`${data[0]}%`, `${data[1]}%`, `${data[2]}%`, `${data[3]}%`],
+
+            //RETIRER PEU IMPORTE LA VERSION 
+            // tooltipsFormattedKeyLabels: `${labels} ${data}%`, 
+
+
+            tooltipsCss: {
+                backgroundColor: orangeClair,
+                border: '1px solid orangeFonce',
+                color: noir,
+                fontSize: '14pt',
+                textAlign: 'left',
+            },
 
             width: 50,
             marginTop: 5,
@@ -104,7 +158,7 @@ const dessinerGraphiqueActivites = () => {
         }
     }).grow().responsive([
         
-        // VERSION BUREAU
+        // // VERSION BUREAU
         {maxWidth: null, width: 450, height: 450, options: {width: null}, css: {'float':'none'}},
         
         // VERSION MOBILE
@@ -131,19 +185,10 @@ const dessinerGraphiquePopulation = () => {
             labels: labels,
             labelsSticksLength: 15,
             labelsSticksLinewidth: 2,
-
-            //devrait-on mettre le text accessible ? 
-            // Sais pas trop, ça change la typo... Et quand je check dans Axe DevTool, on n'a pas de Critical issues ou Serious... On a 1 Moderate et 1 Minor, et c'est du code des graphiques. Donc je le garderais à false
             textAccessible: false, 
-
-            // Car même si on ajoute ces 3 propriétés, ça ne change rien.La doc dit aussi que ce n'est pas certain de rendre un texte accessible (voir : https://www.rgraph.net/canvas/accessible-text.html)
-            // textAccessible: true,         
-            // The default is true now
-            // textAccessibleOverflow: true, 
-            // The default is true now
-            // textAccessiblePointerevents: true,
-
             textSize: 14,
+
+            // J'arrive pas à sélectionné la section a moins de 2% (le mauve)... 
             tooltips: [],
             tooltipsCss: {
                 fontSize: '14pt',
@@ -156,12 +201,12 @@ const dessinerGraphiquePopulation = () => {
             exploded: [8, 8, 8, 8, 8], 
         }
     }).draw().responsive([
-        
+
         // VERSION BUREAU
         {maxWidth: null,width:800,height:400,options:{radius: 100,labelsList: false, labels:labels,title:'',tooltips:null}},
         
         // VERSION MOBILE - Les Labels disparaissent !
-        {maxWidth: 600,width:400,height:350,options:{radius: 100,labels: null,tooltips:labels}}
+        {maxWidth: 600,width:500,height:350,options:{radius: 100,labels: null,tooltips:labels}}
 
     ]);
 };
@@ -178,8 +223,18 @@ const dessinerGraphiqueVolcans = () => {
         options: {
             colors: [vertPale],
             backgroundGrid: false,
+
+
+            // OK C'est pas parfait mais au moins on voit le label dans son entier ! 
             xaxisLabels: ['Mahukona','Kilauea','Kohala','Loihi','Mauna Loa','Mauna Kea'],
+            xaxisLabelsAngle: 10,
             xaxisTickmarks: false,
+
+            // Ça fonctionne, mais j'en pers des bouts...
+            // xaxisPosition: top,
+            // xaxisLabelsPosition: right,
+            // xaxisLabelsSpecificAlign: right,
+
             yaxisTickmarks: true,
             yaxisLabelsCount: 9,
             yaxisScaleUnitsPost: 'm',
@@ -194,24 +249,36 @@ const dessinerGraphiqueVolcans = () => {
                 color: noir,
                 border: `1px solid ${orangeFonce}`,
             },
-
-            // J'essaie de placer les lables de l'axe des x, verticallement pour pouvoir le voir au complet en mobile
-            // xaxisLabelsAngle: 90,
-
-// Ça fonctionne, mais j'en pers des bouts...
-            // xaxisPosition: top,
-            // xaxisLabelsPosition: right,
-            // xaxisLabelsSpecificAlign: right,
         }
     }).responsive([
 
-        // VERSION BUREAU
-        {maxWidth:null,width:850,height:450,options:{linewidth:5,tickmarksSize: 8,textSize: 16,marginInner: 50,'data-textsize': 20, marginLeft: 100},css:{'float':'none'}},
+
+
+
+
+// VERSION 2
+
+        {maxWidth: null,width: 650,height: 250, options: {  yaxisLabelsCount: 9, yaxisTickmarks: true,}},
+        {maxWidth: 900,width: 400,height: 150, options: {  yaxisLabelsCount: 4, yaxisTickmarks: false,}}
+
+// VERSION 1
+
+        // // VERSION BUREAU
+        // {maxWidth:null,width:850,height:450,options:{linewidth:5,tickmarksSize: 8,textSize: 16,marginInner: 50,'data-textsize': 20, marginLeft: 100},css:{'float':'none'}},
         
-        // VERSION MOBILE
-        {maxWidth:600,width:500,height:300,options:{linewidth:3,tickmarksSize: 4,textSize: 12,marginInner: 30,'data-textsize': 14},css:{'float':'none'}}
+        // // VERSION MOBILE
+        // {maxWidth:600,width:500,height:300,options:{linewidth:3,tickmarksSize: 4,textSize: 12,marginInner: 30,'data-textsize': 14},css:{'float':'none'}}
+
+
+
+
 
     ]).on('draw', function (obj) {
+
+
+
+
+        // Je ne vois plus d'animation lool 
         var textsize = obj.get('data-textsize');
 
         textLabel = RGraph.SVG.text({
@@ -284,11 +351,12 @@ const dessinerGraphiquePluie = () => {
         RGraph.clear(obj.canvas, blanc);
 
     }).responsive([
-        {maxWidth: null, width: 750, height: 350,options:{textSize: 14, marginInner: 5,marginLeft: 50}, parentCss: {'float':'right'}},
 
+        // J'ai apporter quelque changement pour qu'on puisse lire les donnés quand l'écran est petit 
+        {maxWidth: null, width: 750, height: 350,options:{textSize: 14, marginInner: 5,marginLeft: 50}, yaxisLabelsCount: 8,},
 
         // À 500px on ne le voit pas au complet
-        {maxWidth: 600, width: 500, height: 200,options:{textSize: 10, marginInner: 2,marginLeft: 50}, parentCss: {'float':'none'}}
+        {maxWidth: 600, width: 500, height: 200,options:{textSize: 18, marginInner: 2, marginLeft: 50, yaxisLabelsCount: 3,}}
     ]);
 };
 
@@ -326,42 +394,33 @@ const dessinerGraphiqueTemperature = () => {
             filled: true,
             filledOpacity: 0,
             filledAccumulative: true,
-            title: 'Hawaï - Température mensuelle moyenne en Celsius',
+            // J'ai enlevé le mot Hawaii du titre car au final c'est une page qui ne parle que d'hawaii alors je ne crois pas que ce soit necessaire de l'écrire.
+            title: 'Température mensuelle moyenne en Celsius',
             titleSubtitle: 'Comparatif entre les températures les plus chaudes et fraîches',
+            xaxisLabelsAngle: 45,
         }
     }).draw().responsive([
-        // VERSION BUREAU
-        {maxWidth: null, width: 750, height: 350, options: {titleSize: 16, textSize: 14, marginInner: 25}, parentCss: {'float': 'none'}},
-        // VERSION MOBILE
-        {maxWidth: 600,  width: 500, height: 200, options: {titleSize: 12, textSize: 10, marginInner: 10}, parentCss: {'float': 'none'}}
+
+        {maxWidth: null, width: 750, height: 350,options:{textSize: 16, marginInner: 5,marginLeft: 50}, yaxisLabelsCount: 8,},
+
+        {maxWidth: 1240, width: 500, height: 350,options:{textSize: 12, marginInner: 5,marginLeft: 50}, yaxisLabelsCount: 8,},
+
+        // À 500px on ne le voit pas au complet
+        {maxWidth: 600, width: 400, height: 200,options:{textSize: 10, marginInner: 2, marginLeft: 50, yaxisLabelsCount: 3,}}
+
+
+// VERSION 1 
+
+        // // VERSION BUREAU
+        // {maxWidth: null, width: 750, height: 350, options: {titleSize: 16, textSize: 14, marginInner: 25},},
+        // // VERSION MOBILE
+        // {maxWidth: 600,  width: 500, height: 200, options: {titleSize: 12, textSize: 10, marginInner: 10},}
         ]);  
 };
 
-//LA FONCTION FONCTIONNE MAIS UN PETIT BUG A MARIAGE. MOI JE L'UTILISERAIS CAR JE TROUVE CA PLUS COOL
-// ACTIVITÉS et MARIAGES ne fonctionnent pas très bien (en mobile comme en bureau)
-// POPULATIONS les tooltips, en mobile, n'apparaissent plus
-// Je ferais des ances.... 
-
-
-// let dernierIndex = 0;
-// navigationPrincipale[0].classList.add('active'); 
-// sectionElement[0].style.display = 'block';
-
-// for(let index = 0; index < sectionElement.length; index++) { 
-
-// 	navigationPrincipale[index].addEventListener('click', displaySection);
-
-//     function displaySection() {
-//         sectionElement[dernierIndex].style.display = 'none'; 
-//         navigationPrincipale[dernierIndex].classList.remove('active');
-            
-//         sectionElement[index].style.display = 'block';
-//         navigationPrincipale[index].classList.add('active');
-        
-//         dernierIndex = index; 
-//         main();
-//     }
-// }
+menuOuvrirBtn.addEventListener('click', ouvrirNavigation);
+menuFermerBtn.addEventListener('click', fermerNavigation);
+window.addEventListener('resize', changerNavigationResize);
 
 const main = () => {
     dessinerGraphiqueMariage(); 

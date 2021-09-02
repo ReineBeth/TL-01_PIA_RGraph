@@ -4,39 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0d5dafc31b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/src/assets/styles/index.css">
     <title>RGraph</title>
 </head>
 <body>
     <header>
+        <button class="menu_open_btn" aria-label="Bouton ouvrir menu"><i class="fa fa-bars"></i></button>
         <div>
             <h1>Hawaï</h1>
             <h2>Quelques données intéressantes</h2>
         </div>
         <nav>
             <ul class="navigation_principale">
-                <li><button aria-label="Navigation principale marigage">Mariage</button></li>
-                <li><button aria-label="Navigation principale activite">Activité</button></li>
-                <li><button aria-label="Navigation principale population">Population</button></li>
-                <li><button aria-label="Navigation principale volcans">Volcans</button></li>
-                <li><button aria-label="Navigation principale pluie">Pluie</button></li>
-                <li><button aria-label="Navigation principale temperature">Température</button></li>
+                <li><a href="#mariage">Mariage</a></li>
+                <li><a href="#activite">Activité</a></li>
+                <li><a href="#population">Population</a></li>
+                <li><a href="#volcans">Volcans</a></li>
+                <li><a href="#pluie">Pluie</a></li>
+                <li><a href="#temperature">Température</a></li>
             </ul>
         </nav>
+        <button class="menu_close_btn" aria-label="bouton fermer menu"><i class="fas fa-times"></i></button>	
     </header>
     <main>
     
         <section>
-            <h3>Mariages selon les comtés d'Hawaï</h3>
-            <canvas id="graphique_mariage" width="600" height="450">
-                [No canvas support]
-            </canvas>
+            <h3 id="mariage">Mariages selon les comtés d'Hawaï</h3>
+
+                <canvas id="graphique_mariage" width="600" height="450">
+                    [No canvas support]
+                </canvas>
+           
             <p><a href="https://health.hawaii.gov/vitalstatistics/preliminary-marriage-total-same-sex/" target="_blank" title="Lien vers le site gouvernement d'Hawaii">Source pour les mariages</a></p>
         </section>
 
         <section>
-            <h3>Activités</h3>
-            <h4>(Les activités populaires selon les offres des compagnies touristiques)</h4>
+            <h3 id="activite">Activités</h3>
+
+            <h4>Les activités populaires selon les offres des compagnies touristiques</h4>
+
             <canvas id="graphique_activites" width="450" height="450">
                 [No canvas support]
             </canvas>
@@ -45,21 +52,25 @@
 
 
         <section>
-            <h3>Population d'Hawaï</h3>
+            <h3 id="population">Population d'Hawaï</h3>
+
             <canvas id="graphique_population" width="600" height="350">
                 [No canvas support]
             </canvas>
+
             <p><a href="https://fr.wikipedia.org/wiki/Hawa%C3%AF" target="_blank" title="Lien vers le wikipédia francophone d'Hawaii">Source pour la population</a></p>
         </section>
         
         <section>
-            <h3>Hauteurs des volcans</h3>
+            <h3 id="volcans">Hauteurs des volcans</h3>
+
             <div id="graphique_volcans"></div>
+
             <p><a href="https://www.to-hawaii.com/fr/volcans.php" target="_blank" title="Lien vers le site To-Hawaii.com">Source pour les volcans</a></p>
         </section>
        
         <section>
-            <h3>Accumulation de pluie annuelle pour trois lieux à différentes altitudes</h3>
+            <h3 id="pluie">Accumulation de pluie annuelle pour trois lieux à différentes altitudes</h3>
         
             <canvas id="graphique_pluie">[No canvas support]</canvas>
 
@@ -67,10 +78,10 @@
         </section>
 
         <section>
-            <h3>Température</h3>
-            <div class="wrapper">
-                <div id="graphique_temperature"></div>
-            </div>
+            <h3 id="temperature">Température</h3>
+
+            <div id="graphique_temperature"></div>
+
             <p><a href="https://fr.wikipedia.org/wiki/Hawa%C3%AF#Climat" target="_blank" title="Lien vers la page Wikipédia - Climat">Source pour la température</a></p>
         </section>
     </main>
