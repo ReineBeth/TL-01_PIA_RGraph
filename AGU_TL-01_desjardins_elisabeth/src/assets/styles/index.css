@@ -83,13 +83,22 @@ h1, h2 {
     right: 25px;
 }
 
+.retour-en-haut {
+    position: sticky;
+    bottom: 5%;
+    align-self: flex-end;
+    font-size: 1.2em;
+}
+
 .menu_open_btn:hover,
-.menu_close_btn:hover {
+.menu_close_btn:hover, 
+.retour-en-haut:hover {
     color: var(--accent-fond-fonce);
 }
 
 .menu_open_btn:focus,
-.menu_close_btn:focus {
+.menu_close_btn:focus, 
+.retour-en-haut:focus {
     border: 0.1em dashed var(--accent-fond-fonce);
     border-radius: 0.5em;
     color: var(--accent-fond-fonce);
@@ -130,7 +139,7 @@ main {
     flex-direction: column;
     flex-grow: 1;
     margin: 0 auto;
-    width: 80vw;
+    width: 95vw;
 }
 
 section { 
@@ -152,10 +161,20 @@ h3 {
     text-align: center;
 }
 
+h3, h4 {
+    width: 70vw;
+}
+
+h4 {
+    color: var(--principale);
+    text-align: center;
+    font-size: .9em;
+}
+
 main a { 
     color: var(--secondaire);
-    font-weight: bold;
     padding: 0.5em;
+    font-size: .7em;
 }
 
 main a:hover { 
