@@ -83,14 +83,12 @@ h1, h2 {
     right: 25px;
 }
 
-/* btn retour-en-haut */
 .retour-en-haut {
     position: sticky;
     bottom: 5%;
     align-self: flex-end;
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
-/* btn retour-en-haut */
 
 .menu_open_btn:hover,
 .menu_close_btn:hover, 
@@ -175,9 +173,8 @@ h4 {
 
 main a { 
     color: var(--secondaire);
-    /* font-weight: bold; */
     padding: 0.5em;
-    font-size: .8em;
+    font-size: .7em;
 }
 
 main a:hover { 

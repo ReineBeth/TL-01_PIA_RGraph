@@ -259,8 +259,7 @@ const dessinerGraphiqueVolcans = () => {
             marginLeft: 60,
             shadow: true,
             tickmarksStyle: 'filledcircle',
-            // Les tooltips sont ou???
-            // tooltips: [],
+            tooltips: data,
             tooltipsCss: {
                 fontSize: '14pt',
                 backgroundColor: orangeClair,
@@ -326,9 +325,6 @@ const dessinerGraphiqueTemperature = () => {
             marginLeft:25,
             months: ['janvier','février','mars','avril','mai','juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
             spline: true,
-            // title: 'Température mensuelle moyenne en Celsius',
-            // titleSubtitle: 'Comparatif entre les températures les plus chaudes et fraîches',
-            // titleSize: '14pt',
             tooltips: '<b>%{property:months[%{index}]}: %{value}°C</b>',
             tooltipsCss: {
                 fontSize: '14pt',
@@ -336,12 +332,11 @@ const dessinerGraphiqueTemperature = () => {
                 color: noir,
                 border: `1px solid ${orangeFonce}`,
             },
-            // xaxis: false,
             xaxisTickmarks: false,
             xaxisLabelsAngle: 45,
             xaxisLabels: ['JAN','FEV','MAR','AVR','MAI','JUI','JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC'],
             yaxis: true,
-            yaxisTickmarks: true
+            yaxisTickmarks: false
         }
     }).draw().responsive([
 
