@@ -1,6 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto&display=swap');
 
 :root { 
+
+    /* Palette de couleur */
+    --principale: #2f365f; 
+    --secondaire: #3d5a5b;
+    --accent-fond-fonce: #d49096;
+    --accent-fond-pale: #d90619;
+
+    /* Couleur graphique */ 
+
     --jaune: #f2c84b;
     --vert_pale: #9fbf2a;
     --vert_fonce: #4c7326; 
@@ -9,214 +18,185 @@
     --mauve_pale: #8b5d8a;
     --mauve_fonce: #5b3580; 
     --rose: #c24275; 
-    --rouge: #b2232d;
     --orange_clair: #fea120; 
     --orange_fonce: #f26a1b; 
+
+    /* Couleur neutres pour graphique et css */
     --blanc: #f5f5f5;
     --noir: #050505;
 }
 
-/* Si on marque 100%, le média quewry ne focntionne pas pour 110% */
-html {
-    font-size: 18px;
+html{ 
+    font-size: 112.5%; 
 }
 
 body { 
     background: var(--blanc);
-    font-family: 'Roboto', sans-serif;
-    /* Ce n'est pas l'idéal... je ne comprends pas pourquoi la ligne 86 et 87 ne fonctionne pas */
-    /* text-align: center; */
+    color: var(--noir);
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
 }
 
-button { 
-    background: transparent;
-    border: none; 
-    font-size: 1em;
-    outline: none;
+li { 
+    list-style-type: none;
 }
 
-a { 
+a {
+    cursor: pointer;
     text-decoration: none;
     outline: none;
 }
 
-li {
-    list-style-type: none;
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
 }
 
-ul {
-    padding: 0;
-    text-align: left;
-}
-
-p {
-    clear: both;
-}
-
-header {
-    background: var(--bleu_fonce);
-    color: var(--blanc);
-    display: flex;
-    justify-content: space-between;
-    /* align-items: center; */
-}
-
-header div {
-    width: 60%;
-}
-
-header nav {
-    width: 35%;
+header { 
+    background: var(--principale);
+    padding: 1.5em;
+    position: relative;
 }
 
 h1, h2 { 
-    padding: 5px;
-    color: var(--jaune);
+    color: var(--blanc);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
     text-align: center;
 }
 
-h1 {
-    font-size: 2.5rem;
+.menu_close_btn {
+    display: none;
 }
 
-h2 {
-    font-size: 1.8rem;
+.menu_open_btn,
+.menu_close_btn { 
+    color: var(--blanc);
+    font-size: 2.5em;
+    padding: 0.2em;
+    position: absolute;
+    top: 25px;
+    right: 25px;
 }
 
-/* h3, h4 {
-    color: var(--rose);
-} */
-
-h3 {
-    font-size: 1.5rem;
-    text-align: center;
+.menu_open_btn:hover,
+.menu_close_btn:hover {
+    color: var(--accent-fond-fonce);
 }
 
-/* h1, h2, h3 {
-    text-align: center;
-} */
+.menu_open_btn:focus,
+.menu_close_btn:focus {
+    border: 0.1em dashed var(--accent-fond-fonce);
+    border-radius: 0.5em;
+    color: var(--accent-fond-fonce);
+}
 
 .navigation_principale { 
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-around; */
-    /* flex-wrap: wrap; */
-    font-size: 1em;
-    /* padding: 2em; */
+    display: none;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px 0;
 }
 
-
-/* Je ferais une navigation à ancres nommées avec des "nav ul li a"   et j'enlèverais toutes ces classes....   Pourquoi ne pas venir chercher tes élément par "header nav ul li a"    Parce que c'est plus clair avec des classes? */
-
-
-.navigation_principale li {
-    /* margin: 0.5em; */
+.navigation_principale li { 
+    margin: 5px;
 }
 
-.navigation_principale button{
+.navigation_principale a { 
     color: var(--blanc);
-    font-weight: 700;
     padding: 0.5em;
 }
 
-
-.navigation_principale button:hover{
-    color: var(--orange_clair);
+.navigation_principale a:hover{
     text-decoration: underline;
+    color: var(--accent-fond-fonce);
 }
 
-.navigation_principale button:focus{
-    color: var(--orange_clair);
-    border: 0.2em dashed var(--orange_clair);
-    border-radius: 0.2em;
-}
-/* Si on décide de ne pas mettre la fonction, la classe active n'est plus necessaire */
-.active { 
-    border-bottom: 0.6em solid var(--orange_clair);
+.navigation_principale a:focus { 
+    border: 0.2em dashed var(--accent-fond-foncet);
+    border-radius: 1em;
+    color: var(--accent-fond-fonce);
 }
 
-main {
+main { 
     display: flex;
-    /* Si on décide de mettre la fonction avec les bouton, le flex direction n'est plus necessaire. */
-    flex-direction: column; 
-    /* justify-content: center; */
-    /* Pourquoi cecii ne fontionne pas? */
     align-items: center;
-    /* justify-items: center; */
+    flex-direction: column;
     flex-grow: 1;
+    margin: 0 auto;
+    width: 80vw;
 }
 
-main a {
-    font-size: .8em;
+section { 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 75px auto; 
+}
+
+section > canvas,
+section > div {
+    max-width: 80%;
+}
+
+h3 {
+    color: var(--principale);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+
+main a { 
+    color: var(--secondaire);
     font-weight: bold;
-    color: var(--rouge);
-    padding: 0.2em;
+    padding: 0.5em;
 }
 
-main a:hover {
-    color: var(--mauve_fonce);
+main a:hover { 
+    color: var(--accent-fond-pale);
     text-decoration: underline;
 }
 
-main a:focus {
-    border: 0.2em dashed var(--mauve_fonce);
-    border-radius: 0.4em;
-    color: var(--mauve_fonce);
-}
-
-section {
-    width: 80%;
-    margin: 0 auto;
-    /* Remettre display none si on decide de prendre la fonction */
-    /* display: none; */ 
+main a:focus { 
+    border: 0.2em dashed var(--accent-fond-pale);
+    border-radius: 1em;
+    color: var(--accent-fond-pale);
 }
 
 footer {
-    background: var(--bleu_fonce);
-    color: var(--blanc);
+    background: var(--principale);
     display: flex;
-    justify-content: space-around;
-    padding: 1em;
 }
 
-#graphique_volcans {
-    /* width: 500px; */
-    /* height: 500px; */
-}
-
-/* Ça empêche d'être responsive */
-#graphique_pluie {
-    /* width: 700px;
-    height: 350px; */
-}
-
-#graphique_temperature { 
-    /* width: 600px; */
-    /* height: 300px; */
+footer p {
+    color: var(--blanc);
+    flex-basis: 100%;
+    text-align: center;
 }
 
 @media (min-width: 800px) {
 
     html {
-        font-size: 24px;
-    }
-    header {
-        flex-direction: column;
-    }
-
-    header div  {
-        width: 100%;
+        font-size: 150%;
     }
 
     header nav {
+        font-size: 0.8em;
         width: 100%;
     }
-
+    
     .navigation_principale {
-        flex-direction: row;
-        justify-content: space-around;
+        display: flex;
+    }
+
+    .menu_open_btn,
+    .menu_close_btn {
+        display: none;
     }
 }

@@ -7,42 +7,72 @@ const bleuFonce = getComputedStyle(document.documentElement).getPropertyValue('-
 const mauvePale = getComputedStyle(document.documentElement).getPropertyValue('--mauve_pale');
 const mauveFonce = getComputedStyle(document.documentElement).getPropertyValue('--mauve_fonce');
 const rose = getComputedStyle(document.documentElement).getPropertyValue('--rose');
-const rouge = getComputedStyle(document.documentElement).getPropertyValue('--rouge');
 const orangeClair = getComputedStyle(document.documentElement).getPropertyValue('--orange_clair');
 const orangeFonce = getComputedStyle(document.documentElement).getPropertyValue('--orange_fonce');
 const blanc = getComputedStyle(document.documentElement).getPropertyValue('--blanc');
 const noir = getComputedStyle(document.documentElement).getPropertyValue('--noir');
 
 //LES ÉLÉMENTS 
-const navigationPrincipale = document.querySelectorAll('.navigation_principale button'); 
-const sectionElement = document.querySelectorAll('section');
+const navigationPrincipale = document.querySelector('.navigation_principale');
+const menuOuvrirBtn = document.querySelector('.menu_open_btn'); 
+const menuFermerBtn = document.querySelector('.menu_close_btn'); 
+
+// Fonctionnalités générales 
+
+function ouvrirNavigation() { 
+    navigationPrincipale.style.display = 'flex';
+    menuFermerBtn.style.display = 'block';
+
+    menuOuvrirBtn.style.display = 'none';
+}
+
+function fermerNavigation() { 
+    navigationPrincipale.style.display = 'none';
+    menuFermerBtn.style.display = 'none';
+
+    menuOuvrirBtn.style.display = 'block';
+}
+
+function changerNavigationResize() { 
+
+    if(window.innerWidth >= '800') {  
+        	ouvrirNavigation(); 
+        	menuFermerBtn.style.display = 'none'; 
+        } else { 
+            fermerNavigation(); 
+            menuOuvrirBtn.style.display = 'block';
+        }
+}
+
+// Les graphiques 
 
 const dessinerGraphiqueMariage = () => {
+
     let labels = ['Honolulu', 'Hawaii', 'Kauai', 'Maui' ];
     new RGraph.HBar({
         id: 'graphique_mariage',
         data: [67, 16, 14, 3],
         options: {
             backgroundGrid: false,
-            xaxis: false,
-            yaxis: false,
-            xaxisScale: false,
+            colors: [mauveFonce],
+            highlightFill: `Gradient(${mauveFonce}:${bleuPale})`,
+            highlightStroke: `Gradient(${mauveFonce}:${bleuPale})`,
             labelsAbove: true,
             labelsAboveUnitsPost: '%', 
-            colors: [mauveFonce],
             shadow: true,
             shadowColor: '#ddd',
             shadowOffsetx: 2,
             shadowOffsety: 2,
-            tooltips: ['Honolulu : 67%', 'Hawaii : 16%', 'Kauai : 14%', 'Maui: 3%'],
+            tooltips: [`${labels[0]} : 67%`, `${labels[1]} : 16%`, `${labels[2]} : 14%`, `${labels[3]}: 3%`],
             tooltipsCss: {
                 fontSize: '14pt',
                 backgroundColor: bleuPale,
                 color: noir,
                 border: `1px solid ${bleuFonce}`,
             },
-            highlightFill: 'Gradient(rgba(255,255,255,0):white)',
-            highlightStroke: 'Gradient(rgba(255,255,255,0):white)'
+            xaxis: false,
+            xaxisScale: false,
+            yaxis: false,
         }
     
     }).on('draw', function (obj)
@@ -52,28 +82,29 @@ const dessinerGraphiqueMariage = () => {
         for (var i=0; i<coords.length; ++i) {
     
             RGraph.text({
+                bold:   true,
+                color:  'white',
                 object: obj,
                 text:   labels[i],
                 x:      coords[i][0] + 10,
                 y:      coords[i][1] + (coords[i][3] / 2),
-                valign: 'center',
-                bold:   true,
-                color:  'white'
+                valign: 'center'
             });
         }
     }).grow().responsive([
         
         // VERSION BUREAU
-        {maxWidth: null,width:600,height: 350,parentCss:{'float':'right'}},
+        {maxWidth: null,width:500,height: 350},
         // VERSION MOBILE
-       {maxWidth: 600,width:400,height: 300,parentCss:{'float':'none'}}
+        {maxWidth: 600,width:400,height: 300}
+
     ]);
 };
 
 // ACTIVITÉS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerGraphiqueActivites = () => {
 
-    let labels = ['Sports d\'eau 47%', 'Visites guidées 15%', 'Culture, histoire et art 14%', 'Dîner-spectacle danse Luau 13%'];
+    let labels = ['Sports d\'eau', 'Visites guidées', 'Culture, histoire et art', 'Dîner-spectacle danse Luau'];
     let data = ['47%','15%','14%','13%'];
 
     activity = new RGraph.Activity({
@@ -82,29 +113,28 @@ const dessinerGraphiqueActivites = () => {
         max: 100,
         value: data,
         options: {
+            backgroundColor: 'transparent',
             colors : [bleuFonce, vertFonce, mauvePale, rose],
-            backgroundColor: '#ffffff',
             labels: labels,
             labelsBold:true,
             labelsColor: noir,
-
-            // BEAUCOUP DE DIFFICULTÉS à mettre ça beau et clean!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // tooltips: 'Résultats:%{key}',
-            // tooltipsFormattedKeyLabels: labels,
-            // tooltipsCss: {
-            //     fontSize: '16pt',
-            //     textAlign: 'left'
-            // },
-
-            width: 50,
             marginTop: 5,
             marginBottom: 5,
             marginLeft: 5,
-            marginRight: 5
+            marginRight: 5,
+            tooltips: [`${data[0]}%`, `${data[1]}%`, `${data[2]}%`, `${data[3]}%`],
+            tooltipsCss: {
+                backgroundColor: orangeClair,
+                border: '1px solid orangeFonce',
+                color: noir,
+                fontSize: '14pt',
+                textAlign: 'left',
+            },
+            width: 50,
         }
     }).grow().responsive([
         
-        // VERSION BUREAU
+        // // VERSION BUREAU
         {maxWidth: null, width: 450, height: 450, options: {width: null}, css: {'float':'none'}},
         
         // VERSION MOBILE
@@ -123,110 +153,40 @@ const dessinerGraphiquePopulation = () => {
         id: 'graphique_population',
         data: [38.60, 24.74, 9.96, 1.57, 25.13],
         options: {
+            colorsStroke: 'transparent',
+            colors: [orangeClair, vertFonce, bleuFonce, mauveFonce, bleuPale],
+            exploded: [8, 8, 8, 8, 8], 
+            labels: labels,
+            labelsSticksLength: 15,
+            labelsSticksLinewidth: 2,
             shadow: true,
             shadowOffsetx: 15,
             shadowOffsety: 15,
             shadowColor: '#aaa',
-            variant: 'donut3d',
-            labels: labels,
-            labelsSticksLength: 15,
-            labelsSticksLinewidth: 2,
-
-            //devrait-on mettre le text accessible ? 
-            // Sais pas trop, ça change la typo... Et quand je check dans Axe DevTool, on n'a pas de Critical issues ou Serious... On a 1 Moderate et 1 Minor, et c'est du code des graphiques. Donc je le garderais à false
             textAccessible: false, 
-
-            // Car même si on ajoute ces 3 propriétés, ça ne change rien.La doc dit aussi que ce n'est pas certain de rendre un texte accessible (voir : https://www.rgraph.net/canvas/accessible-text.html)
-            // textAccessible: true,         
-            // The default is true now
-            // textAccessibleOverflow: true, 
-            // The default is true now
-            // textAccessiblePointerevents: true,
-
             textSize: 14,
             tooltips: [],
             tooltipsCss: {
-                fontSize: '14pt',
                 backgroundColor: blanc,
-                color: noir,
                 border: `1px solid ${bleuFonce}`,
+                color: noir,
+                fontSize: '14pt',
             },
-            colorsStroke: 'transparent',
-            colors: [orangeClair, vertFonce, bleuFonce, mauveFonce, bleuPale],
-            exploded: [8, 8, 8, 8, 8], 
+            variant: 'donut3d',
         }
     }).draw().responsive([
-        
+
         // VERSION BUREAU
-        {maxWidth: null,width:800,height:400,options:{radius: 100,labelsList: false, labels:labels,title:'',tooltips:null}},
+        {maxWidth: null, width:800, options:{ radius: 100, labelsList: false, labels: labels, tooltips:null}},
+     
+        // VERSION TABLETTE
+        {maxWidth: 800, width: 650, height: 350, options:{ radius: 100, labelsList: false, labels: null, tooltips:labels}},
         
-        // VERSION MOBILE - Les Labels disparaissent !
-        {maxWidth: 600,width:400,height:350,options:{radius: 100,labels: null,tooltips:labels}}
+        // VERSION MOBILE
+        {maxWidth: 600, width:500, options:{ radius: 100, labels: null, tooltips:labels}}
 
     ]);
 };
-
-
-// LES HAUTEURS DES VOLCANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const dessinerGraphiqueVolcans = () => {
-    
-    let data = [1000,1246,1600,3000,4169,4200];
-
-    line = new RGraph.SVG.Line({
-        id: 'graphique_volcans',
-        data: data,
-        options: {
-            colors: [vertPale],
-            backgroundGrid: false,
-            xaxisLabels: ['Mahukona','Kilauea','Kohala','Loihi','Mauna Loa','Mauna Kea'],
-            xaxisTickmarks: false,
-            yaxisTickmarks: true,
-            yaxisLabelsCount: 9,
-            yaxisScaleUnitsPost: 'm',
-            backgroundGridColor: '#999',
-            tickmarksStyle: 'filledcircle',
-            marginLeft: 75,
-            shadow: true,
-            tooltips: [1000,1246,1600,3000,4169,4200],
-            tooltipsCss: {
-                fontSize: '14pt',
-                backgroundColor: orangeClair,
-                color: noir,
-                border: `1px solid ${orangeFonce}`,
-            },
-
-            // J'essaie de placer les lables de l'axe des x, verticallement pour pouvoir le voir au complet en mobile
-            // xaxisLabelsAngle: 90,
-
-// Ça fonctionne, mais j'en pers des bouts...
-            // xaxisPosition: top,
-            // xaxisLabelsPosition: right,
-            // xaxisLabelsSpecificAlign: right,
-        }
-    }).responsive([
-
-        // VERSION BUREAU
-        {maxWidth:null,width:850,height:450,options:{linewidth:5,tickmarksSize: 8,textSize: 16,marginInner: 50,'data-textsize': 20, marginLeft: 100},css:{'float':'none'}},
-        
-        // VERSION MOBILE
-        {maxWidth:600,width:500,height:300,options:{linewidth:3,tickmarksSize: 4,textSize: 12,marginInner: 30,'data-textsize': 14},css:{'float':'none'}}
-
-    ]).on('draw', function (obj) {
-        var textsize = obj.get('data-textsize');
-
-        textLabel = RGraph.SVG.text({
-            object: obj,
-            parent: obj.svg,
-            size:   textsize,
-            bold:   (textsize > 14),
-            x:      obj.coords[5].x,
-            y:      obj.coords[5].y - 25,
-            valign: 'bottom',
-            halign: 'center'
-        });
-    }).draw();
-};
-
 
 // ACCUMULATIONS PLUIE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerGraphiquePluie = () => {
@@ -248,55 +208,106 @@ const dessinerGraphiquePluie = () => {
             [55, 295, 50]
         ],
         options: {
-            colors: [mauveFonce, bleuFonce, orangeClair],
-            xaxisLabels: ['J','F','M','A','M','J','J', 'A', 'S', 'O', 'N', 'D'],
-            xaxis: true,
-            yaxis: true,
-            backgroundGridVlines: true,
             backgroundGridHlinesCount: 8,
-            
-         
-            yaxisLabelsCount: 8,
-            yaxisScaleMax: 450,
-            
-          
+            backgroundGridVlines: true,
+            colors: [mauveFonce, bleuFonce, orangeClair],
+            marginLeft: 55,
             key: ['Honolulu','Hilo','Mauna Loa '],
             keyPosition: 'margin',
             keyPositionX: 100,
-
-         
+            textAccessible: false,
             title: 'Comparatif du nombre de pluie à Honolulu, Hilo et Mauna Loa',
-
             titleX: 100,
             titleY: 0,
             titleBold: true,
             titleHalign: 'left',
-            
-            // tooltips: [],
-            // tooltipsCss: {
-            //     textAlign: 'center',
-            // },
-            textAccessible: false 
-            //si on le met à true ça rajoute un titre intégré au tableau 
+            xaxisLabels: ['JAN','FEV','MAR','AVR','MAI','JUI','JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC'],
+            xaxis: true,
+            xaxisLabelsAngle: 45,
+            yaxis: true,
+            yaxisLabelsCount: 8,
+            yaxisScaleMax: 450,
         }
     }).grow().on('beforedraw', function (obj)
     {
         RGraph.clear(obj.canvas, blanc);
 
     }).responsive([
-        {maxWidth: null, width: 750, height: 350,options:{textSize: 14, marginInner: 5,marginLeft: 50}, parentCss: {'float':'right'}},
 
+        // VERSION BUREAU 
+        {maxWidth: null, width: 750, height: 350,options:{textSize: 12, marginInner: 5, yaxisLabelsCount: 8,}},
 
-        // À 500px on ne le voit pas au complet
-        {maxWidth: 600, width: 500, height: 200,options:{textSize: 10, marginInner: 2,marginLeft: 50}, parentCss: {'float':'none'}}
+        // VERSION TABLETTE
+        {maxWidth: 1240, width: 500, height: 350,options:{textSize: 12, marginInner: 5, yaxisLabelsCount: 6,}},
+        
+        // VERSION MOBILE
+        {maxWidth: 600, width: 400, height: 200,options:{textSize: 12, marginInner: 2, yaxisLabelsCount: 3,}}
+
     ]);
 };
 
 
+// LES HAUTEURS DES VOLCANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const dessinerGraphiqueVolcans = () => {
+    
+    let data = [1000,1246,1600,3000,4169,4200];
+
+    line = new RGraph.SVG.Line({
+        id: 'graphique_volcans',
+        data: data,
+        options: {
+            backgroundGrid: false,
+            backgroundGridColor: '#999',
+            colors: [vertPale],
+            marginLeft: 55,
+            shadow: true,
+            tickmarksStyle: 'filledcircle',
+            tooltipsCss: {
+                fontSize: '14pt',
+                backgroundColor: orangeClair,
+                color: noir,
+                border: `1px solid ${orangeFonce}`,
+            },
+            xaxisLabels: ['Mahukona','Kilauea','Kohala','Loihi','Mauna Loa','Mauna Kea'],
+            xaxisLabelsAngle: 15,
+            xaxisTickmarks: false,
+            yaxisTickmarks: true,
+            yaxisLabelsCount: 9,
+            yaxisScaleUnitsPost: 'm',
+        }
+    }).responsive([
+
+        // VERSION BUREAU 
+        {maxWidth: null, width: 750, height: 350,options:{textSize: 10, marginInner: 5, yaxisLabelsCount: 8}},
+
+        // VERSION TABLETTE
+        {maxWidth: 1240, width: 500, height: 350,options:{textSize: 10, marginInner: 5, yaxisLabelsCount: 6}},
+        
+        // VERSION MOBILE
+        {maxWidth: 600, width: 400, height: 200,options:{textSize: 10, marginInner: 2, yaxisLabelsCount: 3}}
+
+
+    ]).on('draw', function (obj) {
+
+        var textsize = obj.get('data-textsize');
+
+        textLabel = RGraph.SVG.text({
+            object: obj,
+            parent: obj.svg,
+            size:   textsize,
+            bold:   (textsize > 14),
+            x:      obj.coords[5].x,
+            y:      obj.coords[5].y - 25,
+            valign: 'bottom',
+            halign: 'center'
+        });
+    }).draw();
+};
+
 // TEMPÉRATURE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerGraphiqueTemperature = () => { 
     
-    data = [
+    let data = [
         [19, 19, 20, 20, 21, 22, 24, 23, 23, 23, 20, 20],
         [8, 8, 8, 8, 9, 8, 7, 9, 9, 8, 9, 7]
     ];
@@ -305,13 +316,19 @@ const dessinerGraphiqueTemperature = () => {
         id: 'graphique_temperature',
         data: data,
         options: {
-            colors: [bleuPale, rose], 
             backgroundGridVlines: false,
             backgroundGridBorder: false,
-            xaxis: true,
-            yaxis: true,
-            xaxisLabels: ['JAN','FEV','MAR','AVR','MAI','JUI','JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC'],
+            colors: [bleuPale, rose], 
+            filled: true,
+            filledOpacity: 0,
+            filledAccumulative: true,
+            linewidth: 3,
+            marginTop: 45,
+            marginLeft: 55,
             months: ['janvier','février','mars','avril','mai','juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+            spline: true,
+            title: 'Température mensuelle moyenne en Celsius',
+            titleSubtitle: 'Comparatif entre les températures les plus chaudes et fraîches',
             tooltips: '<b>%{property:months[%{index}]}: %{value}°C</b>',
             tooltipsCss: {
                 fontSize: '14pt',
@@ -319,56 +336,36 @@ const dessinerGraphiqueTemperature = () => {
                 color: noir,
                 border: `1px solid ${orangeFonce}`,
             },
-            linewidth: 3,
-            marginTop: 45,
-            marginLeft: 25,
-            spline: true,
-            filled: true,
-            filledOpacity: 0,
-            filledAccumulative: true,
-            title: 'Hawaï - Température mensuelle moyenne en Celsius',
-            titleSubtitle: 'Comparatif entre les températures les plus chaudes et fraîches',
+            xaxis: true,
+            xaxisLabelsAngle: 45,
+            xaxisLabels: ['JAN','FEV','MAR','AVR','MAI','JUI','JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC'],
+            yaxis: true,
+
         }
     }).draw().responsive([
-        // VERSION BUREAU
-        {maxWidth: null, width: 750, height: 350, options: {titleSize: 16, textSize: 14, marginInner: 25}, parentCss: {'float': 'none'}},
-        // VERSION MOBILE
-        {maxWidth: 600,  width: 500, height: 200, options: {titleSize: 12, textSize: 10, marginInner: 10}, parentCss: {'float': 'none'}}
+
+        // VERSION BUREAU 
+        {maxWidth: null, width: 750, height: 350,options:{textSize: 10, marginInner: 5, yaxisLabelsCount: 8}},
+
+        // VERSION TABLETTE
+        {maxWidth: 1240, width: 500, height: 350,options:{textSize: 10, marginInner: 5, yaxisLabelsCount: 6}},
+
+        // VERSION BUREAU 
+        {maxWidth: 600, width: 400, height: 200,options:{textSize: 10, marginInner: 2, yaxisLabelsCount: 3}}
+
         ]);  
 };
 
-//LA FONCTION FONCTIONNE MAIS UN PETIT BUG A MARIAGE. MOI JE L'UTILISERAIS CAR JE TROUVE CA PLUS COOL
-// ACTIVITÉS et MARIAGES ne fonctionnent pas très bien (en mobile comme en bureau)
-// POPULATIONS les tooltips, en mobile, n'apparaissent plus
-// Je ferais des ances.... 
-
-
-// let dernierIndex = 0;
-// navigationPrincipale[0].classList.add('active'); 
-// sectionElement[0].style.display = 'block';
-
-// for(let index = 0; index < sectionElement.length; index++) { 
-
-// 	navigationPrincipale[index].addEventListener('click', displaySection);
-
-//     function displaySection() {
-//         sectionElement[dernierIndex].style.display = 'none'; 
-//         navigationPrincipale[dernierIndex].classList.remove('active');
-            
-//         sectionElement[index].style.display = 'block';
-//         navigationPrincipale[index].classList.add('active');
-        
-//         dernierIndex = index; 
-//         main();
-//     }
-// }
+menuOuvrirBtn.addEventListener('click', ouvrirNavigation);
+menuFermerBtn.addEventListener('click', fermerNavigation);
+window.addEventListener('resize', changerNavigationResize);
 
 const main = () => {
     dessinerGraphiqueMariage(); 
     dessinerGraphiqueActivites();
     dessinerGraphiquePopulation();
-    dessinerGraphiqueVolcans();
     dessinerGraphiquePluie();
+    dessinerGraphiqueVolcans();
     dessinerGraphiqueTemperature(); 
 };
 
