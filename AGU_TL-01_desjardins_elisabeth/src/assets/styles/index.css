@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto&display=swap');
 
 :root { 
+
     /* Palette de couleur */
-    --principale: #048C7f; 
-    --secondaire-pale: #88BB9A;
-    --secondaire-fonce: #011126;
-    /* Trouver couleur qui se démarque ++ */
-    --accent: #BF391B;
+    --principale: #2f365f; 
+    --secondaire: #3d5a5b;
+    --accent-fond-fonce: #d49096;
+    --accent-fond-pale: #d90619;
 
     /* Couleur graphique */ 
 
@@ -27,7 +27,6 @@
 }
 
 html{ 
-    /* 112.5% = 18px (pour un navigateur par default) et plus accessible qu'un valeur absolut*/
     font-size: 112.5%; 
 }
 
@@ -36,7 +35,6 @@ body {
     color: var(--noir);
     display: flex;
     flex-direction: column;
-    /* min-height est plus responsive */
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
 }
@@ -65,7 +63,7 @@ header {
 }
 
 h1, h2 { 
-    color: var(--secondaire-fonce);
+    color: var(--blanc);
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
     text-align: center;
@@ -87,25 +85,20 @@ h1, h2 {
 
 .menu_open_btn:hover,
 .menu_close_btn:hover {
-    color: var(--accent);
+    color: var(--accent-fond-fonce);
 }
 
 .menu_open_btn:focus,
 .menu_close_btn:focus {
-    background: var(--secondaire-pale);
-    border: 0.1em dashed var(--accent);
+    border: 0.1em dashed var(--accent-fond-fonce);
     border-radius: 0.5em;
-    color: var(--accent);
-}
-
-nav{
-    display: none;
+    color: var(--accent-fond-fonce);
 }
 
 .navigation_principale { 
-    display: flex;
-    justify-content: space-between;
+    display: none;
     flex-wrap: wrap;
+    justify-content: space-around;
     font-size: 1.2em;
     font-weight: bold;
     padding: 10px 0;
@@ -122,62 +115,58 @@ nav{
 
 .navigation_principale a:hover{
     text-decoration: underline;
-    color: var(--accent);
+    color: var(--accent-fond-fonce);
 }
 
 .navigation_principale a:focus { 
-    background: var(--secondaire-pale);
-    border: 0.2em dashed var(--accent);
+    border: 0.2em dashed var(--accent-fond-foncet);
     border-radius: 1em;
-    color: var(--accent);
+    color: var(--accent-fond-fonce);
 }
+
 main { 
-    /* border: blue 10px dashed; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     flex-grow: 1;
     margin: 0 auto;
     width: 80vw;
-    /* Ici on n'influence pas les graphique */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 section { 
-    /* Permet d'influencé l'alignement des graphiques */
     display: flex;
-    flex-direction: column;
     align-items: center;
-    /* border: deeppink 5px dashed; */
+    flex-direction: column;
+    margin: 75px auto; 
 }
 
 section > canvas,
 section > div {
-    /* border: red 10px dashed; */
     max-width: 80%;
 }
 
 h3 {
+    color: var(--principale);
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    color: var(--principale);
     text-align: center;
 }
 
 main a { 
-    color: var(--secondaire-pale);
+    color: var(--secondaire);
     font-weight: bold;
     padding: 0.5em;
 }
 
 main a:hover { 
-    color: var(--accent);
+    color: var(--accent-fond-pale);
     text-decoration: underline;
 }
 
 main a:focus { 
-    color: var(--accent);
-    border: 0.2em dashed var(--accent);
+    border: 0.2em dashed var(--accent-fond-pale);
     border-radius: 1em;
+    color: var(--accent-fond-pale);
 }
 
 footer {
@@ -193,259 +182,21 @@ footer p {
 
 @media (min-width: 800px) {
 
-    /* Équivaut à 24px sur un navigateur par défaut */
     html {
         font-size: 150%;
     }
 
-    header {
-        flex-direction: column;
-    }
-
-    header div  {
-        width: 100%;
-    }
-
     header nav {
-        display: block;
         font-size: 0.8em;
         width: 100%;
+    }
+    
+    .navigation_principale {
+        display: flex;
     }
 
     .menu_open_btn,
     .menu_close_btn {
         display: none;
     }
-
-    .navigation_principale {
-        flex-direction: row;
-        justify-content: space-around;
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Garder des traces de ce qui existe */
-/*
-Si on marque 100%, le média quewry ne focntionne pas pour 110% 
-html {
-    font-size: 18px;
-}
-
-body { 
-    background: var(--blanc);
-    font-family: 'Roboto', sans-serif;
-    Ce n'est pas l'idéal... je ne comprends pas pourquoi la ligne 86 et 87 ne fonctionne pas 
-    text-align: center; 
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-button { 
-    background: transparent;
-    border: none; 
-    font-size: 1em;
-    outline: none;
-}
-
-a { 
-    text-decoration: none;
-    outline: none;
-}
-
-li {
-    list-style-type: none;
-}
-
-ul {
-    padding: 0;
-    text-align: left;
-}
-
-p {
-    clear: both;
-}
-
-header {
-    background: var(--bleu_fonce);
-    color: var(--blanc);
-    display: flex;
-    justify-content: space-between;
-    /* align-items: center; 
-}
-
-header div {
-    width: 60%;
-}
-
-header nav {
-    width: 35%;
-}
-
-h1, h2 { 
-    padding: 5px;
-    color: var(--jaune);
-    text-align: center;
-}
-
-h1 {
-    font-size: 2.5rem;
-}
-
-h2 {
-    font-size: 1.8rem;
-}
-
-/* h3, h4 {
-    color: var(--rose);
-} 
-
-h3 {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-/* h1, h2, h3 {
-    text-align: center;
-} 
-
-.navigation_principale { 
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-around; */
-    /* flex-wrap: wrap; 
-    font-size: 1em;
-    /* padding: 2em; 
-}
-
-
-/* Je ferais une navigation à ancres nommées avec des "nav ul li a"   et j'enlèverais toutes ces classes....   Pourquoi ne pas venir chercher tes élément par "header nav ul li a"    Parce que c'est plus clair avec des classes? 
-
-
-.navigation_principale li {
-    /* margin: 0.5em; 
-}
-
-.navigation_principale button{
-    color: var(--blanc);
-    font-weight: 700;
-    padding: 0.5em;
-}
-
-
-.navigation_principale button:hover{
-    color: var(--orange_clair);
-    text-decoration: underline;
-}
-
-.navigation_principale button:focus{
-    color: var(--orange_clair);
-    border: 0.2em dashed var(--orange_clair);
-    border-radius: 0.2em;
-}
-/* Si on décide de ne pas mettre la fonction, la classe active n'est plus necessaire 
-.active { 
-    border-bottom: 0.6em solid var(--orange_clair);
-}
-
-main {
-    display: flex;
-    /* Si on décide de mettre la fonction avec les bouton, le flex direction n'est plus necessaire. 
-    flex-direction: column; 
-    /* justify-content: center; 
-    /* Pourquoi cecii ne fontionne pas? 
-    align-items: center;
-    /* justify-items: center; 
-    flex-grow: 1;
-}
-
-main a {
-    font-size: .8em;
-    font-weight: bold;
-    color: var(--rouge);
-    padding: 0.2em;
-}
-
-main a:hover {
-    color: var(--mauve_fonce);
-    text-decoration: underline;
-}
-
-main a:focus {
-    border: 0.2em dashed var(--mauve_fonce);
-    border-radius: 0.4em;
-    color: var(--mauve_fonce);
-}
-
-section {
-    width: 80%;
-    margin: 0 auto;
-    /* Remettre display none si on decide de prendre la fonction */
-    /* display: none; 
-}
-
-footer {
-    background: var(--bleu_fonce);
-    color: var(--blanc);
-    display: flex;
-    justify-content: space-around;
-    padding: 1em;
-}
-
-#graphique_volcans {
-    /* width: 500px; */
-    /* height: 500px; 
-}
-
-/* Ça empêche d'être responsive 
-#graphique_pluie {
-    /* width: 700px;
-    height: 350px; 
-}
-
-#graphique_temperature { 
-    /* width: 600px; 
-    /* height: 300px; 
-}
-
-@media (min-width: 800px) {
-
-    html {
-        font-size: 24px;
-    }
-    header {
-        flex-direction: column;
-    }
-
-    header div  {
-        width: 100%;
-    }
-
-    header nav {
-        width: 100%;
-    }
-
-    .navigation_principale {
-        flex-direction: row;
-        justify-content: space-around;
-    }
-}
-*/
