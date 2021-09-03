@@ -10,15 +10,9 @@
     </head>
     <body>
         <header>
-
-            <!-- Changer bouton de place : dans nav plus sémantique -->
-
-            <div>
-                <h1>Hawaï</h1>
-                <h2>Quelques données intéressantes</h2>
-            </div>
+            <h1>Hawaï</h1>
+            <h2>Quelques données intéressantes</h2>
             <nav>
-                <button class="menu_open_btn" aria-label="Bouton ouvrir menu"><i class="fa fa-bars"></i></button>
                 <ul class="navigation_principale">
                     <li><a href="#mariage">Mariage</a></li>
                     <li><a href="#activite">Activité</a></li>
@@ -27,11 +21,11 @@
                     <li><a href="#volcans">Volcans</a></li>
                     <li><a href="#temperature">Température</a></li>
                 </ul>
+                <button class="menu_open_btn" aria-label="Bouton ouvrir menu"><i class="fa fa-bars"></i></button>
                 <button class="menu_close_btn" aria-label="bouton fermer menu"><i class="fas fa-times"></i></button>	
             </nav>
         </header>
         <main>
-        
             <section>
                 <h3 id="mariage">Mariages selon les comtés d'Hawaï</h3>
                     <canvas id="graphique_mariage" width="600" height="450">
@@ -39,7 +33,6 @@
                     </canvas>
                 <p><a href="https://health.hawaii.gov/vitalstatistics/preliminary-marriage-total-same-sex/" target="_blank" title="Lien vers le site gouvernement d'Hawaii">Source pour les mariages</a></p>
             </section>
-
             <section>
                 <h3 id="activite">Activités</h3>
                 <h4>Les activités populaires selon les offres des compagnies touristiques</h4>
@@ -48,8 +41,6 @@
                 </canvas>
                 <p><a href="https://www.gohawaii.com/fr/experiences?f%5B0%5D=field_categories%3A551&f%5B1%5D=field_categories%3A596&f%5B2%5D=field_categories%3A546&f%5B3%5D=field_categories%3A46&modified=1#listings" target="_blank" title="Lien vers le site The Hawaiian Islands ">Source pour les activités</a></p>
             </section>
-
-
             <section>
                 <h3 id="population">Population d'Hawaï</h3>
                 <canvas id="graphique_population" width="600" height="350">
@@ -57,26 +48,25 @@
                 </canvas>
                 <p><a href="https://fr.wikipedia.org/wiki/Hawa%C3%AF" target="_blank" title="Lien vers le wikipédia francophone d'Hawaii">Source pour la population</a></p>
             </section>
-
             <section>
                 <h3 id="pluie">Accumulation de pluie annuelle pour trois lieux à différentes altitudes</h3>
                 <canvas id="graphique_pluie">
                     [No canvas support]
                 </canvas>
-                <p><a href="https://www.climatsetvoyages.com/climat/hawaii" target="_blank" title="Lien vers le site Climats et voyages">Source pour la quantité de pluie</a></p>
-            </section>
-            
+                <p><a href="https://www.climatsetvoyages.com/climat/hawaii" target="_blank" title="Lien vers le site Climats et voyages">Source pour la quantité de pluie</a></p>             
+            </section>           
             <section>
                 <h3 id="volcans">Hauteurs des volcans</h3>
                 <div id="graphique_volcans"></div>
-                <p><a href="https://www.to-hawaii.com/fr/volcans.php" target="_blank" title="Lien vers le site To-Hawaii.com">Source pour les volcans</a></p>
+                <p><a href="https://www.to-hawaii.com/fr/volcans.php" target="_blank" title="Lien vers le site To-Hawaii.com">Source pour les volcans</a></p>              
             </section>
-
             <section>
-                <h3 id="temperature">Température</h3>
+                <h3 id="temperature">Température mensuelle moyenne en Celsius</h3>
+                <h4>Comparatif entre les températures les plus chaudes et fraîches</h4>
                 <div id="graphique_temperature"></div>
                 <p><a href="https://fr.wikipedia.org/wiki/Hawa%C3%AF#Climat" target="_blank" title="Lien vers la page Wikipédia - Climat">Source pour la température</a></p>
             </section>
+            <a href="#top" title="Retour en haut" class="retour-en-haut">&#8607;</a>
         </main>
         <footer>
             <p>PIIA</p>
@@ -104,6 +94,5 @@
 
         <!-- INDEX JS -->
         <script src="/src/assets/scripts/index.js"></script>
-
     </body>
 </html>

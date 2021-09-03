@@ -142,8 +142,6 @@ const dessinerGraphiqueActivites = () => {
     ]);
 };
 
-
-
 // POPULATIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 const dessinerGraphiquePopulation = () => {
@@ -246,7 +244,6 @@ const dessinerGraphiquePluie = () => {
     ]);
 };
 
-
 // LES HAUTEURS DES VOLCANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const dessinerGraphiqueVolcans = () => {
     
@@ -259,9 +256,11 @@ const dessinerGraphiqueVolcans = () => {
             backgroundGrid: false,
             backgroundGridColor: '#999',
             colors: [vertPale],
-            marginLeft: 55,
+            marginLeft: 60,
             shadow: true,
             tickmarksStyle: 'filledcircle',
+            // Les tooltips sont ou???
+            // tooltips: [],
             tooltipsCss: {
                 fontSize: '14pt',
                 backgroundColor: orangeClair,
@@ -269,7 +268,7 @@ const dessinerGraphiqueVolcans = () => {
                 border: `1px solid ${orangeFonce}`,
             },
             xaxisLabels: ['Mahukona','Kilauea','Kohala','Loihi','Mauna Loa','Mauna Kea'],
-            xaxisLabelsAngle: 15,
+            xaxisLabelsAngle: 18,
             xaxisTickmarks: false,
             yaxisTickmarks: true,
             yaxisLabelsCount: 9,
@@ -324,11 +323,12 @@ const dessinerGraphiqueTemperature = () => {
             filledAccumulative: true,
             linewidth: 3,
             marginTop: 45,
-            marginLeft: 55,
+            marginLeft:25,
             months: ['janvier','février','mars','avril','mai','juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
             spline: true,
-            title: 'Température mensuelle moyenne en Celsius',
-            titleSubtitle: 'Comparatif entre les températures les plus chaudes et fraîches',
+            // title: 'Température mensuelle moyenne en Celsius',
+            // titleSubtitle: 'Comparatif entre les températures les plus chaudes et fraîches',
+            // titleSize: '14pt',
             tooltips: '<b>%{property:months[%{index}]}: %{value}°C</b>',
             tooltipsCss: {
                 fontSize: '14pt',
@@ -336,11 +336,12 @@ const dessinerGraphiqueTemperature = () => {
                 color: noir,
                 border: `1px solid ${orangeFonce}`,
             },
-            xaxis: true,
+            // xaxis: false,
+            xaxisTickmarks: false,
             xaxisLabelsAngle: 45,
             xaxisLabels: ['JAN','FEV','MAR','AVR','MAI','JUI','JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC'],
             yaxis: true,
-
+            yaxisTickmarks: true
         }
     }).draw().responsive([
 
